@@ -1,0 +1,2426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Priyadarshana Dadhich | Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+    }
+
+    :root{
+
+      --bg:#070816;
+      --text:#ffffff;
+      --text2:#c7c7d9;
+      --card:rgba(255,255,255,.05);
+      --border:rgba(255,255,255,.08);
+
+      --primary:#8b5cf6;
+      --secondary:#06b6d4;
+      --pink:#ec4899;
+
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+
+    }
+
+    body.light-mode{
+
+      --bg:#f4f7fb;
+      --text:#111827;
+      --text2:#4b5563;
+      --card:rgba(255,255,255,.75);
+      --border:rgba(0,0,0,.08);
+
+      --shadow:0 20px 40px rgba(0,0,0,.08);
+
+    }
+
+    body{
+      font-family:'Outfit',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+      transition:.4s;
+    }
+
+    body::before{
+      content:'';
+      position:fixed;
+      width:600px;
+      height:600px;
+      background:radial-gradient(circle,var(--primary) 0%,transparent 70%);
+      top:-200px;
+      right:-150px;
+      opacity:.2;
+      z-index:-1;
+      filter:blur(40px);
+    }
+
+    body::after{
+      content:'';
+      position:fixed;
+      width:500px;
+      height:500px;
+      background:radial-gradient(circle,var(--secondary) 0%,transparent 70%);
+      bottom:-200px;
+      left:-150px;
+      opacity:.2;
+      z-index:-1;
+      filter:blur(40px);
+    }
+
+    /* PARTICLE TRAIL CANVAS */
+
+    #particles{
+      position:fixed;
+      inset:0;
+      z-index:-3;
+      pointer-events:none;
+    }
+
+    /* MOUSE FOLLOW GLOW */
+
+    .cursor-glow{
+      position:fixed;
+      width:300px;
+      height:300px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(139,92,246,.18), transparent 70%);
+      pointer-events:none;
+      z-index:-1;
+      transform:translate(-50%,-50%);
+      transition:transform .08s linear;
+    }
+
+    /* ANIMATED BACKGROUND ENGINE */
+
+    .animated-bg{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      z-index:-2;
+      pointer-events:none;
+    }
+
+    /* FLOATING BALLS */
+
+    .animated-bg span{
+      position:absolute;
+      display:block;
+      border-radius:50%;
+      animation:floatAnimation linear infinite;
+      bottom:-150px;
+      opacity:.18;
+      backdrop-filter:blur(10px);
+    }
+
+    body:not(.light-mode) .animated-bg span{
+      background:linear-gradient(135deg, var(--primary), var(--secondary));
+      box-shadow:0 0 30px rgba(139,92,246,.25);
+    }
+
+    body.light-mode .animated-bg span{
+      background:linear-gradient(135deg, rgba(139,92,246,.25), rgba(6,182,212,.25));
+      box-shadow:0 0 30px rgba(0,0,0,.08);
+    }
+
+    .animated-bg span:nth-child(1){ left:10%; width:80px; height:80px; animation-duration:18s; }
+    .animated-bg span:nth-child(2){ left:20%; width:140px; height:140px; animation-duration:22s; animation-delay:2s; }
+    .animated-bg span:nth-child(3){ left:35%; width:60px; height:60px; animation-duration:16s; animation-delay:4s; }
+    .animated-bg span:nth-child(4){ left:50%; width:180px; height:180px; animation-duration:28s; }
+    .animated-bg span:nth-child(5){ left:65%; width:100px; height:100px; animation-duration:20s; animation-delay:3s; }
+    .animated-bg span:nth-child(6){ left:75%; width:70px; height:70px; animation-duration:15s; }
+    .animated-bg span:nth-child(7){ left:85%; width:160px; height:160px; animation-duration:25s; animation-delay:2s; }
+    .animated-bg span:nth-child(8){ left:95%; width:90px; height:90px; animation-duration:18s; }
+
+    @keyframes floatAnimation{
+      0%{ transform:translateY(0) rotate(0deg); opacity:0; border-radius:40%; }
+      20%{ opacity:.18; }
+      100%{ transform:translateY(-120vh) rotate(720deg); opacity:0; border-radius:50%; }
+    }
+
+    /* 3D FLOATING OBJECTS */
+
+    .floating-objects{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:-1;
+    }
+
+    .glass-orb{
+      position:absolute;
+      border-radius:50%;
+      backdrop-filter:blur(20px);
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 0 60px rgba(139,92,246,.25);
+    }
+
+    .orb1{ width:220px; height:220px; top:12%; left:8%; }
+    .orb2{ width:140px; height:140px; top:60%; right:12%; }
+    .orb3{ width:100px; height:100px; bottom:10%; left:40%; }
+
+    .glass-cube{
+      position:absolute;
+      width:120px;
+      height:120px;
+      border-radius:24px;
+      background:linear-gradient(135deg, rgba(139,92,246,.18), rgba(6,182,212,.12));
+      border:1px solid rgba(255,255,255,.08);
+      backdrop-filter:blur(12px);
+      transform-style:preserve-3d;
+    }
+
+    .cube1{ top:20%; right:18%; }
+    .cube2{ bottom:18%; left:18%; }
+
+    .ring{
+      position:absolute;
+      border-radius:50%;
+      border:2px solid rgba(139,92,246,.25);
+      animation:pulseRing 6s infinite ease-in-out;
+    }
+
+    .ring1{ width:300px; height:300px; top:30%; left:50%; }
+    .ring2{ width:180px; height:180px; bottom:12%; right:20%; animation-delay:2s; }
+
+    @keyframes pulseRing{
+      0%,100%{ transform:scale(1); opacity:.5; }
+      50%{ transform:scale(1.15); opacity:1; }
+    }
+
+    /* CONTAINER CONFIGURATION */
+
+    .container{
+      width:90%;
+      max-width:1200px;
+      margin:auto;
+    }
+
+    /* NAVBAR */
+
+    nav{
+      position:fixed;
+      width:100%;
+      top:0;
+      z-index:999;
+      backdrop-filter:blur(20px);
+      background:rgba(10,10,25,0.5);
+      border-bottom:1px solid var(--border);
+    }
+
+    body.light-mode nav{
+      background:rgba(255,255,255,.75);
+    }
+
+    .nav-content{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:15px 0;
+    }
+
+    .logo{
+      font-size:1.5rem;
+      font-weight:800;
+      background:linear-gradient(90deg,var(--secondary),var(--primary));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      display:inline-block;
+    }
+
+    .nav-right{
+      display:flex;
+      align-items:center;
+      gap:20px;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:25px;
+    }
+
+    .nav-links a{
+      color:var(--text);
+      text-decoration:none;
+      transition:.3s;
+      font-weight:500;
+    }
+
+    .nav-links a:hover{
+      color:var(--primary);
+    }
+
+    /* LANGUAGE SELECTOR SYSTEM */
+
+    .lang-switcher{
+      padding:8px 14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:var(--card);
+      color:var(--text);
+      backdrop-filter:blur(10px);
+      outline:none;
+      cursor:pointer;
+      font-family:'Outfit', sans-serif;
+      font-size:0.85rem;
+      font-weight:600;
+      transition:.3s ease;
+    }
+
+    .lang-switcher:hover{
+      border-color:var(--primary);
+    }
+
+    .lang-switcher option {
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    /* THEME TOGGLE */
+
+    .toggle-btn{
+      width:50px;
+      height:28px;
+      border-radius:50px;
+      background:linear-gradient(90deg,var(--primary),var(--secondary));
+      position:relative;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      padding:4px;
+    }
+
+    .toggle-circle{
+      width:20px;
+      height:20px;
+      border-radius:50%;
+      background:white;
+      position:absolute;
+      left:4px;
+      transition:.4s;
+    }
+
+    body.light-mode .toggle-circle{
+      left:26px;
+    }
+
+    /* HERO STYLING & TEXT REVEAL PREPARATION */
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:60px;
+      align-items:center;
+    }
+
+    .hero-text h1,
+    .hero-text p,
+    .hero-buttons a {
+      opacity:0;
+    }
+
+    .hero-text h1{
+      font-size:5rem;
+      line-height:1.1;
+      margin-bottom:20px;
+      font-weight:800;
+    }
+
+    .hero-text h1 span{
+      background:linear-gradient(90deg,var(--secondary),var(--primary),var(--pink));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero-text p{
+      color:var(--text2);
+      font-size:1.1rem;
+      max-width:550px;
+      margin-bottom:35px;
+      line-height:1.8;
+    }
+
+    .hero-buttons{
+      display:flex;
+      gap:15px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .btn{
+      padding:15px 30px;
+      border-radius:15px;
+      text-decoration:none;
+      font-weight:600;
+      display:inline-block;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .btn-primary{
+      background:linear-gradient(90deg,var(--primary),var(--secondary));
+      color:white;
+      box-shadow:0 15px 40px rgba(139,92,246,.35);
+    }
+
+    .btn-secondary{
+      border:1px solid var(--border);
+      color:var(--text);
+      background:var(--card);
+    }
+
+    .download-btn{
+      position:relative;
+      overflow:hidden;
+    }
+
+    .download-btn::before{
+      content:'';
+      position:absolute;
+      width:0%;
+      height:100%;
+      left:0;
+      top:0;
+      background:rgba(255,255,255,.15);
+      transition:.5s;
+    }
+
+    .download-btn:hover::before{
+      width:100%;
+    }
+
+    .download-btn span{
+      position:relative;
+      z-index:2;
+    }
+
+    /* SOCIAL BUTTONS */
+
+    .social-btn{
+      padding:15px 26px;
+      border-radius:15px;
+      text-decoration:none;
+      font-weight:600;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      position:relative;
+      overflow:hidden;
+      transition:.4s ease;
+      border:1px solid var(--border);
+      backdrop-filter:blur(12px);
+      color:var(--text);
+      background:var(--card);
+      box-shadow:var(--shadow);
+    }
+
+    .social-btn:hover{
+      transform:translateY(-6px) scale(1.03);
+    }
+
+    .linkedin-btn{
+      background:linear-gradient(135deg, rgba(0,119,181,.18), rgba(0,119,181,.05));
+      border-color:rgba(0,119,181,.35);
+    }
+
+    .linkedin-btn:hover{
+      box-shadow:0 20px 40px rgba(0,119,181,.25);
+    }
+
+    .github-btn{
+      background:linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+    }
+
+    .github-btn:hover{
+      box-shadow:0 20px 40px rgba(255,255,255,.12);
+    }
+
+    .social-btn::before{
+      content:'';
+      position:absolute;
+      top:-100%;
+      left:-100%;
+      width:250%;
+      height:250%;
+      background:linear-gradient(120deg, transparent 30%, rgba(255,255,255,.15), transparent 70%);
+      transform:rotate(25deg);
+      transition:.8s;
+    }
+
+    .social-btn:hover::before{
+      top:-20%;
+      left:-20%;
+    }
+
+    .social-btn span{
+      position:relative;
+      z-index:2;
+    }
+
+    /* HERO GRAPHICS STRUCT */
+
+    .hero-3d{
+      position:relative;
+      height:500px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .cube{
+      position:relative;
+      width:260px;
+      height:260px;
+      transform-style:preserve-3d;
+    }
+
+    .cube div{
+      position:absolute;
+      width:260px;
+      height:260px;
+      background:var(--card);
+      border:2px solid var(--border);
+      backdrop-filter:blur(20px);
+      box-shadow:0 0 40px rgba(139,92,246,.2);
+    }
+
+    .front{ transform:translateZ(130px); }
+    .back{ transform:rotateY(180deg) translateZ(130px); }
+    .left{ transform:rotateY(-90deg) translateZ(130px); }
+    .right{ transform:rotateY(90deg) translateZ(130px); }
+    .top{ transform:rotateX(90deg) translateZ(130px); }
+    .bottom{ transform:rotateX(-90deg) translateZ(130px); }
+
+    .floating-circle{
+      position:absolute;
+      border-radius:50%;
+      animation:float 5s ease-in-out infinite;
+      filter:blur(2px);
+    }
+
+    .circle1{ width:80px; height:80px; background:var(--primary); top:20px; left:20px; }
+    .circle2{ width:50px; height:50px; background:var(--secondary); bottom:50px; right:20px; }
+    .circle3{ width:120px; height:120px; background:var(--pink); opacity:.4; bottom:20px; left:50px; }
+
+    @keyframes float{
+      0%,100%{ transform:translateY(0px); }
+      50%{ transform:translateY(-20px); }
+    }
+
+    /* GLOBAL SECTION INTERACTION ARCHITECTURE */
+
+    section{
+      padding:110px 0;
+    }
+
+    .section-title{
+      font-size:3rem;
+      text-align:center;
+      margin-bottom:70px;
+      font-weight:700;
+    }
+
+    .section-title span{
+      color:var(--primary);
+    }
+
+    /* UNIFIED 3D MATRIX HOVER ENGINE */
+
+    .skill-box,
+    .project-card,
+    .experience-box{
+      transform-style:preserve-3d;
+      transition:transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* ABOUT */
+
+    .about-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:50px;
+      align-items:center;
+    }
+
+    .glass-card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:30px;
+      padding:40px;
+      backdrop-filter:blur(15px);
+      box-shadow:var(--shadow);
+    }
+
+    .about-grid p{
+      color:var(--text2);
+      line-height:1.9;
+      margin-bottom:20px;
+    }
+
+    .designer-image{
+      perspective:1000px;
+    }
+
+    .designer-image img{
+      width:100%;
+      border-radius:30px;
+      transform:rotateY(-8deg) rotateX(4deg);
+      transition:.5s;
+      box-shadow:var(--shadow);
+    }
+
+    .designer-image img:hover{
+      transform:rotateY(0deg) rotateX(0deg) scale(1.02);
+    }
+
+    /* PREMIUM BENTO SKILLS DESIGN GRID */
+
+    .skills-bento{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:28px;
+    }
+
+    .skill-box{
+      position:relative;
+      padding:35px;
+      border-radius:32px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      backdrop-filter:blur(18px);
+      overflow:hidden;
+      box-shadow:0 10px 40px rgba(0,0,0,.25);
+    }
+
+    .skill-box:hover{
+      border-color:var(--primary);
+      box-shadow:0 20px 50px rgba(139,92,246,.25);
+    }
+
+    .skill-box::before{
+      content:'';
+      position:absolute;
+      top:-50%;
+      right:-50%;
+      width:220px;
+      height:220px;
+      background:radial-gradient(circle, rgba(139,92,246,.18), transparent 70%);
+      transition:.5s;
+    }
+
+    .skill-box:hover::before{
+      transform:scale(1.3);
+    }
+
+    .skill-box.large{
+      grid-column:span 2;
+    }
+
+    .skill-icon{
+      font-size:3rem;
+      margin-bottom:22px;
+    }
+
+    .skill-box h3{
+      font-size:1.6rem;
+      margin-bottom:14px;
+    }
+
+    .skill-box p{
+      color:var(--text2);
+      line-height:1.8;
+      font-size:1rem;
+    }
+
+    .skill-box p strong {
+      color: var(--secondary);
+    }
+
+    /* PROJECTS MATRIX */
+
+    .projects{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:30px;
+    }
+
+    .project-card{
+      overflow:hidden;
+      border-radius:30px;
+      background:var(--card);
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      cursor:pointer;
+      position:relative;
+      opacity: 0; 
+    }
+
+    .project-card::before{
+      content:'';
+      position:absolute;
+      top:-100%;
+      left:-100%;
+      width:250%;
+      height:250%;
+      background:linear-gradient(120deg, transparent 30%, rgba(255,255,255,.08), transparent 70%);
+      transform:rotate(25deg);
+      transition:.8s;
+      pointer-events:none;
+    }
+
+    .project-card:hover::before{
+      top:-20%;
+      left:-20%;
+    }
+
+    .project-card img{
+      width:100%;
+      height:240px;
+      object-fit:cover;
+      transition:transform .6s ease;
+    }
+
+    .project-card:hover img{
+      transform:scale(1.08);
+    }
+
+    .project-content{
+      padding:28px;
+      position:relative;
+      z-index:2;
+    }
+
+    .project-content h3{
+      margin-bottom:12px;
+      font-size:1.4rem;
+    }
+
+    .project-content p{
+      color:var(--text2);
+      line-height:1.7;
+      margin-bottom:20px;
+    }
+
+    .project-content a{
+      color:var(--primary);
+      text-decoration:none;
+      font-weight:600;
+      position:relative;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      transition:.3s ease;
+    }
+
+    .project-content a:hover{
+      transform:translateX(8px);
+    }
+
+    .project-tag{
+      position:absolute;
+      top:18px;
+      right:18px;
+      background:linear-gradient(90deg, var(--primary), var(--secondary));
+      color:white;
+      padding:8px 14px;
+      border-radius:50px;
+      font-size:.8rem;
+      font-weight:600;
+      z-index:5;
+    }
+
+    /* WORK EXPERIENCE MATRIX */
+
+    .experience-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:30px;
+    }
+
+    .experience-box{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:30px;
+      padding:35px;
+      backdrop-filter:blur(15px);
+      box-shadow:var(--shadow);
+    }
+
+    .experience-box:hover{
+      border-color:var(--primary);
+    }
+
+    .exp-badge{
+      display:inline-block;
+      padding:8px 18px;
+      border-radius:50px;
+      margin-bottom:18px;
+      background:linear-gradient(90deg, var(--primary), var(--secondary));
+      color:white;
+      font-size:.9rem;
+      font-weight:600;
+    }
+
+    .experience-box h3{
+      font-size:1.5rem;
+      margin-bottom:10px;
+    }
+
+    .experience-box h4{
+      color:var(--secondary);
+      margin-bottom:18px;
+      font-weight:500;
+    }
+
+    .experience-box p{
+      color:var(--text2);
+      line-height:1.8;
+    }
+
+    /* CONTACT METRICS */
+
+    .contact{
+      text-align:center;
+    }
+
+    .contact-box{
+      max-width:700px;
+      margin:auto;
+      padding:60px;
+    }
+
+    .contact-box p{
+      color:var(--text2);
+      margin:25px 0;
+      line-height:1.8;
+    }
+
+    .contact-form{
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+      margin-top:35px;
+    }
+
+    .contact-form input,
+    .contact-form textarea{
+      width:100%;
+      padding:18px 20px;
+      border-radius:18px;
+      border:1px solid var(--border);
+      background:var(--card);
+      color:var(--text);
+      font-size:1rem;
+      outline:none;
+      backdrop-filter:blur(12px);
+      transition:.3s ease;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus{
+      border-color:var(--primary);
+      box-shadow:0 0 20px rgba(139,92,246,.2);
+    }
+
+    .contact-form textarea{
+      resize:none;
+    }
+
+    .send-btn{
+      border:none;
+      cursor:pointer;
+      width:fit-content;
+    }
+
+    .send-btn:hover{
+      transform:translateY(-5px) scale(1.02);
+    }
+
+    /* FOOTER SYSTEM */
+
+    footer{
+      text-align:center;
+      padding:30px;
+      color:var(--text2);
+      border-top:1px solid var(--border);
+    }
+
+    .footer-socials{
+      display:flex;
+      justify-content:center;
+      gap:25px;
+      margin-bottom:18px;
+      flex-wrap:wrap;
+    }
+
+    .footer-socials a{
+      color:var(--text2);
+      text-decoration:none;
+      transition:.3s;
+      font-weight:500;
+    }
+
+    .footer-socials a:hover{
+      color:var(--primary);
+    }
+
+    /* HIGH FREQUENCY RESPONSIVE ENGINES */
+
+    @media(max-width:900px){
+
+      .hero-grid,
+      .about-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero{
+        padding-top:120px;
+      }
+
+      .hero-text h1{
+        font-size:3.2rem;
+      }
+
+      .nav-links{
+        display:none;
+      }
+
+      .hero-3d{
+        height:350px;
+      }
+
+      .skill-box.large{
+        grid-column:span 1;
+      }
+
+      .contact-box{
+        padding:40px 20px;
+      }
+
+      .send-btn{
+        width:100%;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <canvas id="particles"></canvas>
+
+  <div class="cursor-glow"></div>
+
+  <div class="animated-bg">
+
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+
+    <div class="floating-objects">
+      <div class="glass-orb orb1"></div>
+      <div class="glass-orb orb2"></div>
+      <div class="glass-orb orb3"></div>
+      <div class="glass-cube cube1"></div>
+      <div class="glass-cube cube2"></div>
+      <div class="ring ring1"></div>
+      <div class="ring ring2"></div>
+    </div>
+
+  </div>
+
+  <nav>
+
+    <div class="container nav-content">
+
+      <div class="logo">PRIYA.</div>
+
+      <div class="nav-right">
+
+        <div class="nav-links">
+          <a href="#about" data-i18n="nav_about">About</a>
+          <a href="#skills" data-i18n="nav_skills">Skills</a>
+          <a href="#experience" data-i18n="nav_experience">Experience</a>
+          <a href="#projects" data-i18n="nav_projects">Projects</a>
+          <a href="#certifications" data-i18n="nav_certifications">Certifications</a>
+          <a href="#contact" data-i18n="nav_contact">Contact</a>
+        </div>
+
+        <select id="languageSwitcher" class="lang-switcher">
+          <option value="en">EN</option>
+          <option value="hi">हिन्दी</option>
+          <option value="ja">日本語</option>
+          <option value="ru">Русский</option>
+          <option value="ko">한국어</option>
+          <option value="es">Español</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+        </select>
+
+        <div class="toggle-btn" id="themeToggle">
+          <div class="toggle-circle"></div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </nav>
+
+  <section class="hero" data-aos="fade-up">
+
+    <div class="container hero-grid">
+
+      <div class="hero-text">
+
+        <h1 data-i18n="hero_title">
+          Priyadarshana <span>Dadhich</span>
+        </h1>
+
+        <p data-i18n="hero_desc">
+          UI/UX Designer, Graphic Designer & AIML Developer creating
+          modern digital experiences with creative visuals,
+          branding, and AI-powered applications.
+        </p>
+
+        <div class="hero-buttons">
+
+          <a href="#projects" class="btn btn-primary" data-i18n="hero_btn_projects">
+            View Projects
+          </a>
+
+          <a href="./Priya_resume.pdf"
+          download="Priyadarshana_Dadhich_Resume.pdf"
+          class="btn btn-secondary download-btn" id="resBtn">
+
+            <span data-i18n="hero_btn_resume">⬇ Download Resume</span>
+
+          </a>
+
+          <a href="https://www.linkedin.com/in/priyadarshana-dadhich-790a27272/"
+          target="_blank"
+          class="social-btn linkedin-btn">
+
+            <span>LinkedIn</span>
+
+          </a>
+
+          <a href="https://github.com/Priya290803"
+          target="_blank"
+          class="social-btn github-btn">
+
+            <span>GitHub</span>
+
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="hero-3d">
+
+        <div class="floating-circle circle1"></div>
+        <div class="floating-circle circle2"></div>
+        <div class="floating-circle circle3"></div>
+
+        <div class="cube">
+          <div class="front"></div>
+          <div class="back"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+          <div class="top"></div>
+          <div class="bottom"></div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="about">
+
+    <div class="container">
+
+      <h2 class="section-title" data-i18n="about_title">
+        About <span>Me</span>
+      </h2>
+
+      <div class="about-grid">
+
+        <div class="glass-card" data-aos="fade-right">
+
+          <p data-i18n="about_p1">
+            I am a creative and detail-oriented professional
+            with a strong foundation in visual design,
+            strategic communication,
+            and organizational leadership.
+          </p>
+
+          <p data-i18n="about_p2">
+            I thrive at the intersection of human connection
+            and creative strategy, focusing my passion on
+            graphic design, brand marketing,
+            human resources,
+            and high-energy event coordination.
+          </p>
+
+          <p data-i18n="about_p3">
+            With specialized hands-on experience designing
+            engaging, audience-focused social media campaigns
+            using tools like Canva and Adobe Photoshop,
+            I love crafting cohesive brand identities
+            that genuinely connect with people.
+          </p>
+
+          <p data-i18n="about_p4">
+            Beyond design, my experience coordinating
+            large-scale events has strengthened my skills in
+            cross-team collaboration,
+            logistical planning,
+            leadership,
+            and seamless project execution.
+          </p>
+
+          <p data-i18n="about_p5">
+            Whether I am managing team dynamics,
+            handling client relationships,
+            or building creative marketing content,
+            my goal is always to deliver impactful,
+            human-centered,
+            and visually memorable experiences.
+          </p>
+
+        </div>
+
+        <div class="designer-image" data-aos="fade-left">
+
+          <img
+          src="./my_photo.jpg"
+          alt="Priyadarshana Dadhich">
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="skills" class="skills-section" data-aos="fade-up">
+
+    <div class="container">
+
+      <h2 class="section-title" data-i18n="skills_title">
+        Professional <span>Skillset</span>
+      </h2>
+
+      <div class="skills-bento">
+
+        <div class="skill-box large" data-aos="zoom-in" data-aos-delay="0">
+
+          <div class="skill-icon">💻</div>
+
+          <h3 data-i18n="skills_tech_h">Technical Skills</h3>
+
+          <p data-i18n="skills_tech_p">
+            <strong>Languages & Core:</strong><br>
+            Python, JavaScript, SQL, C, Data Structures, Machine Learning.
+            <br><br>
+            <strong>Web Development:</strong><br>
+            HTML, CSS, React.js, Node.js, Express.js, MongoDB (MERN Stack).
+            <br><br>
+            <strong>Libraries & Frameworks:</strong><br>
+            Streamlit, OpenCV, pandas, NumPy, NLTK, scikit-learn.
+            <br><br>
+            <strong>Tools & Databases:</strong><br>
+            Git, PostgreSQL, Redis.
+          </p>
+
+        </div>
+
+        <div class="skill-box" data-aos="zoom-in" data-aos-delay="100">
+
+          <div class="skill-icon">🎨</div>
+
+          <h3 data-i18n="skills_ui_h">UI/UX Design</h3>
+
+          <p data-i18n="skills_ui_p">
+            User interface design,
+            wireframing,
+            prototyping,
+            responsive layouts,
+            and user experience design.
+          </p>
+
+        </div>
+
+        <div class="skill-box" data-aos="zoom-in" data-aos-delay="200">
+
+          <div class="skill-icon">🖌️</div>
+
+          <h3 data-i18n="skills_des_h">Design & Marketing</h3>
+
+          <p data-i18n="skills_des_p">
+            Canva,
+            Photoshop,
+            Adobe Illustrator,
+            Figma,
+            branding,
+            content creation,
+            and visual communication.
+          </p>
+
+        </div>
+
+        <div class="skill-box" data-aos="zoom-in" data-aos-delay="300">
+
+          <div class="skill-icon">🤖</div>
+
+          <h3 data-i18n="skills_ai_h">AI & Machine Learning</h3>
+
+          <p data-i18n="skills_ai_p">
+            Chatbots,
+            recommendation systems,
+            NLP,
+            computer vision,
+            intelligent automation,
+            and AI-powered applications.
+          </p>
+
+        </div>
+
+        <div class="skill-box large" data-aos="zoom-in" data-aos-delay="400">
+
+          <div class="skill-icon">🚀</div>
+
+          <h3 data-i18n="skills_soft_h">Soft Skills & Leadership</h3>
+
+          <p data-i18n="skills_soft_p">
+            Communication,
+            creativity,
+            leadership,
+            teamwork,
+            team management,
+            collaboration,
+            presentation,
+            client handling,
+            time management,
+            and self-improvement.
+            <br><br>
+            <strong>Languages:</strong><br>
+            English, Hindi
+          </p>
+
+        </div>
+
+        <div class="skill-box" data-aos="zoom-in" data-aos-delay="500">
+
+          <div class="skill-icon">⚡</div>
+
+          <h3 data-i18n="skills_anim_h">Frontend Animation</h3>
+
+          <p data-i18n="skills_anim_p">
+            GSAP,
+            Anime.js,
+            AOS,
+            interactive UI effects,
+            glassmorphism,
+            3D UI,
+            and modern web animations.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="experience" data-aos="fade-up">
+
+    <div class="container">
+
+      <h2 class="section-title" data-i18n="exp_title">
+        Work <span>Experience</span>
+      </h2>
+
+      <div class="experience-grid">
+
+        <div class="experience-box" data-aos="fade-up" data-aos-delay="0">
+
+          <span class="exp-badge">2025</span>
+
+          <h3 data-i18n="exp1_h">GenAI Trainee</h3>
+
+          <h4 data-i18n="exp1_sub">ReGex Software Services, Jaipur</h4>
+
+          <p data-i18n="exp1_p">
+            Worked on AI-powered multilingual chatbots,
+            Streamlit applications, PostgreSQL integration,
+            and responsive UI systems.
+          </p>
+
+        </div>
+
+        <div class="experience-box" data-aos="fade-up" data-aos-delay="100">
+
+          <span class="exp-badge">2024</span>
+
+          <h3 data-i18n="exp2_h">Machine Learning Trainee</h3>
+
+          <h4 data-i18n="exp2_sub">Acmegrade</h4>
+
+          <p data-i18n="exp2_p">
+            Built machine learning projects including
+            recommendation systems, dashboards,
+            and computer vision applications.
+          </p>
+
+        </div>
+
+        <div class="experience-box" data-aos="fade-up" data-aos-delay="200">
+
+          <span class="exp-badge">2025</span>
+
+          <h3 data-i18n="exp3_h">Event Coordinator</h3>
+
+          <h4 data-i18n="exp3_sub">Resonance 2k25</h4>
+
+          <p data-i18n="exp3_p">
+            Managed event coordination, participant engagement,
+            teamwork, and technical event operations.
+          </p>
+
+        </div>
+
+        <div class="experience-box" data-aos="fade-up" data-aos-delay="300">
+
+          <span class="exp-badge">2024</span>
+
+          <h3 data-i18n="exp4_h">Management Lead</h3>
+
+          <h4 data-i18n="exp4_sub">Student Innovation Network — Cup of Excellence</h4>
+
+          <p data-i18n="exp4_p">
+            Led complete event management operations, sponsorship handling, logistics, and participant coordination. Successfully managed sponsors, coordinated teams, and ensured smooth workflow throughout the event. Received Certificate of Recommendation for leadership and management excellence.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="projects">
+
+    <div class="container">
+
+      <h2 class="section-title" data-i18n="proj_title">
+        Featured <span>Projects</span>
+      </h2>
+
+      <div class="projects">
+
+        <div class="project-card" data-aos="fade-up">
+
+          <div class="project-tag" data-i18n="proj1_tag">AI Chatbot</div>
+
+          <img
+          src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop"
+          alt="SyncPro BOT">
+
+          <div class="project-content">
+
+            <h3>SyncPro BOT</h3>
+
+            <p data-i18n="proj1_p">
+              A multilingual AI chatbot built using Streamlit,
+              Gemini/Gemma APIs, and PostgreSQL featuring
+              persistent chat history, intelligent model switching,
+              and a responsive modern interface.
+            </p>
+
+            <a href="https://github.com/Priya290803" target="_blank" data-i18n="proj_view">View Project →</a>
+
+          </div>
+
+        </div>
+
+        <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+
+          <div class="project-tag" data-i18n="proj2_tag">Full Stack AI</div>
+
+          <img
+          src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?q=80&w=1200&auto=format&fit=crop"
+          alt="EVE AI Event System">
+
+          <div class="project-content">
+
+            <h3>EVE — AI Event Management System</h3>
+
+            <p data-i18n="proj2_p">
+              Role-based workflow platform using Node.js,
+              PostgreSQL, Redis, and AI chatbot support with
+              sentiment analysis, attendance tracking,
+              analytics, and workflow automation.
+            </p>
+
+            <a href="https://github.com/Priya290803" target="_blank" data-i18n="proj_view">View Project →</a>
+
+          </div>
+
+        </div>
+
+        <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+
+          <div class="project-tag" data-i18n="proj3_tag">MERN Stack</div>
+
+          <img
+          src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1200&auto=format&fit=crop"
+          alt="Movie Review Website">
+
+          <div class="project-content">
+
+            <h3 data-i18n="proj3_h">Movie Review Website</h3>
+
+            <p data-i18n="proj3_p">
+              Full-stack MERN application with authentication,
+              movie search, dynamic detail pages,
+              review systems, and interactive user comments.
+            </p>
+
+            <a href="https://github.com/Priya290803" target="_blank" data-i18n="proj_view">View Project →</a>
+
+          </div>
+
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+
+          <div class="project-tag" data-i18n="proj4_tag">Machine Learning</div>
+
+          <img
+          src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop"
+          alt="Music Recommendation">
+
+          <div class="project-content">
+
+            <h3 data-i18n="proj4_h">Music Recommendation System</h3>
+
+            <p data-i18n="proj4_p">
+              Content-based recommendation engine using Python,
+              pandas, NLTK, and scikit-learn with TF-IDF
+              vectorization and cosine similarity algorithms.
+            </p>
+
+            <a href="https://github.com/Priya290803" target="_blank" data-i18n="proj_view">View Project →</a>
+
+          </div>
+
+        </div>
+
+        <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+
+          <div class="project-tag" data-i18n="proj5_tag">Web App</div>
+
+          <img
+          src="https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?q=80&w=1200&auto=format&fit=crop"
+          alt="Weather Dashboard">
+
+          <div class="project-content">
+
+            <h3 data-i18n="proj5_h">Weather Dashboard</h3>
+
+            <p data-i18n="proj5_p">
+              Responsive weather application integrated with
+              OpenWeatherMap API and geolocation services
+              for real-time weather and 5-day forecasts.
+            </p>
+
+            <a href="https://github.com/Priya290803" target="_blank" data-i18n="proj_view">View Project →</a>
+
+          </div>
+
+        </div>
+
+        <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+
+          <div class="project-tag" data-i18n="proj6_tag">Frontend + GSAP</div>
+
+          <img
+          src="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1200&auto=format&fit=crop"
+          alt="Fake Currency Detection">
+
+          <div class="project-content">
+
+            <h3 data-i18n="proj6_h">Fake Currency Detection System</h3>
+
+            <p data-i18n="proj6_p">
+              Frontend simulation project with image upload,
+              serial number validation, GSAP animations,
+              local storage authentication,
+              and interactive workflow UI.
+            </p>
+
+            <a href="https://github.com/Priya290803" target="_blank" data-i18n="proj_view">View Project →</a>
+
+          </div>
+
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+
+          <div class="project-tag" data-i18n="proj7_tag">Computer Vision</div>
+
+          <img
+          src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?q=80&w=1200&auto=format&fit=crop"
+          alt="Face Detection">
+
+          <div class="project-content">
+
+            <h3 data-i18n="proj7_h">Face Detection System</h3>
+
+            <p data-i18n="proj7_p">
+              Real-time video stream face detection application
+              built using Python, OpenCV,
+              and Haar Cascade algorithms
+              for efficient facial recognition.
+            </p>
+
+            <a href="https://github.com/Priya290803" target="_blank" data-i18n="proj_view">View Project →</a>
+
+          </div>
+
+        </div>
+
+        <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+
+          <div class="project-tag" data-i18n="proj8_tag">Branding</div>
+
+          <img
+          src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?q=80&w=1200&auto=format&fit=crop"
+          alt="Poster Designs">
+
+          <div class="project-content">
+
+            <h3 data-i18n="proj8_h">Social Media Poster Designs</h3>
+
+            <p data-i18n="proj8_p">
+              Creative promotional posters,
+              branding materials,
+              and social media graphics designed
+              using Canva and Photoshop
+              for digital engagement campaigns.
+            </p>
+
+            <a href="https://drive.google.com/drive/folders/18u4slx6Po-X1LxOWAKWFqNtQTMkox7Ov?usp=sharing" target="_blank" data-i18n="proj_view_des">View Designs →</a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="certifications">
+
+    <div class="container">
+
+      <h2 class="section-title" data-i18n="cert_title">
+        Certifications & <span>Achievements</span>
+      </h2>
+
+      <div class="skills-bento">
+
+        <div class="skill-box large" data-aos="fade-up">
+
+          <div class="skill-icon">📜</div>
+
+          <h3 data-i18n="cert_box_h">Professional Certifications</h3>
+
+          <p data-i18n="cert_box_p">
+            <strong>NPTEL:</strong><br>
+            Python for Data Science Certification.
+            <br><br>
+            <strong>Infosys Certifications:</strong><br>
+            Database Design & ER Modelling,
+            C Programming,
+            Python Programming.
+            <br><br>
+            <strong>1stop.ai (Jul–Sep 2025):</strong><br>
+            Internship Certificate,
+            Project Completion Certificate,
+            Cyber Security Participation.
+          </p>
+
+        </div>
+
+        <div class="skill-box" data-aos="fade-up" data-aos-delay="100">
+
+          <div class="skill-icon">🏆</div>
+
+          <h3 data-i18n="cert_award_h">Awards</h3>
+
+          <p data-i18n="cert_award_p">
+            Secured <strong>1st Prize</strong>
+            in Hardware Project Competition
+            at JIET for innovative project development
+            and technical presentation.
+          </p>
+
+        </div>
+
+        <div class="skill-box" data-aos="fade-up" data-aos-delay="200">
+
+          <div class="skill-icon">💡</div>
+
+          <h3 data-i18n="cert_hack_h">Hackathons</h3>
+
+          <p data-i18n="cert_hack_p">
+            Participated in
+            <strong>Smart India Hackathon (SIH)</strong>
+            showcasing innovation,
+            teamwork,
+            and problem-solving skills.
+          </p>
+
+        </div>
+
+        <div class="skill-box" data-aos="fade-up" data-aos-delay="300">
+
+          <div class="skill-icon">🎖️</div>
+
+          <h3 data-i18n="cert_extra_h">Extracurricular</h3>
+
+          <p data-i18n="cert_extra_p">
+            3 Raj NCC Cadet with participation
+            in National Camp activities,
+            leadership training,
+            discipline,
+            and team coordination.
+          </p>
+
+        </div>
+
+        <div class="skill-box large" data-aos="fade-up" data-aos-delay="400">
+
+          <div class="skill-icon">🚀</div>
+
+          <h3 data-i18n="cert_lead_h">Leadership & Management</h3>
+
+          <p data-i18n="cert_lead_p">
+            Recognized for leadership,
+            event management,
+            sponsor handling,
+            and organizational excellence
+            through multiple college
+            and technical event initiatives.
+            <br><br>
+            Successfully managed teams,
+            coordinated event workflows,
+            and delivered impactful
+            audience-focused experiences.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="contact">
+
+    <div class="container contact">
+
+      <div class="glass-card contact-box" data-aos="zoom-in-up">
+
+        <h2 class="section-title" data-i18n="contact_title">
+          Let's <span>Work</span> Together
+        </h2>
+
+        <p data-i18n="contact_desc">
+          Available for UI/UX Design, Graphic Design,
+          Branding, Freelance Projects,
+          and Creative Collaborations.
+        </p>
+
+        <form
+        action="https://formspree.io/f/mzzgrjrr"
+        method="POST"
+        class="contact-form">
+
+          <input type="text" name="name" id="form_name" placeholder="Your Name" required>
+
+          <input type="email" name="email" id="form_email" placeholder="Your Email" required>
+
+          <textarea name="message" id="form_msg" rows="6" placeholder="Your Message" required></textarea>
+
+          <button type="submit" class="btn btn-primary send-btn" data-i18n="contact_btn">
+            Send Message
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <footer>
+
+    <div class="footer-socials">
+
+      <a href="https://www.linkedin.com/in/priyadarshana-dadhich-790a27272/" target="_blank">
+        LinkedIn
+      </a>
+
+      <a href="https://github.com/Priya290803" target="_blank">
+        GitHub
+      </a>
+
+    </div>
+
+    <span data-i18n="footer_text">© 2026 Priyadarshana Dadhich — UI/UX & Graphic Designer</span>
+
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+  <script src="https://unpkg.com/i18next@23.10.1/i18next.min.js"></script>
+
+  <script>
+
+    // GRAPHICS ENGINE: PARTICLE TRAIL CONTEXT
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let particlesArray = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+        this.alpha = 1;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.alpha -= 0.015;
+      }
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.fillStyle = '#8b5cf6';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    // THEME CONFIGURATION TERMINAL
+    const toggle = document.getElementById('themeToggle');
+    toggle.addEventListener('click',()=>{
+      document.body.classList.toggle('light-mode');
+      localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+    });
+    if(localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode');
+
+    const glow = document.querySelector('.cursor-glow');
+    const cube = document.querySelector('.cube');
+    const downloadBtn = document.querySelector('.download-btn');
+    
+    // Dynamic cards targeting array including certification elements
+    const cards = document.querySelectorAll('.skill-box, .project-card, .experience-box');
+
+    // UNIFIED INTERACTION MOUSE MATRIX RUNTIME
+    document.addEventListener('mousemove',(e)=>{
+      glow.style.left = e.clientX + 'px';
+      glow.style.top = e.clientY + 'px';
+
+      if(Math.random() < 0.4) {
+        particlesArray.push(new Particle(e.clientX, e.clientY));
+      }
+
+      if(cube) {
+        let x = (window.innerWidth / 2 - e.pageX) / 25;
+        let y = (window.innerHeight / 2 - e.pageY) / 25;
+        cube.style.transform = `rotateX(${y}deg) rotateY(${-x}deg)`;
+      }
+    });
+
+    function handleParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+        particlesArray[i].draw();
+        if (particlesArray[i].alpha <= 0) {
+          particlesArray.splice(i, 1);
+          i--;
+        }
+      }
+      requestAnimationFrame(handleParticles);
+    }
+    handleParticles();
+
+    // CARD TORQUE COMPUTATION ENGINE
+    cards.forEach(card => {
+      card.addEventListener('mousemove',(e)=>{
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / 14);
+        const rotateY = ((centerX - x) / 14);
+
+        card.style.transform = `
+          perspective(1000px)
+          rotateX(${rotateX}deg)
+          rotateY(${rotateY}deg)
+          translateY(-10px)
+        `;
+      });
+
+      card.addEventListener('mouseleave',()=>{
+        card.style.transform = `
+          perspective(1000px)
+          rotateX(0deg)
+          rotateY(0deg)
+          translateY(0px)
+        `;
+      });
+    });
+
+    // GLOBAL TRANSLATION RESERVOIR MATRIX
+    const resources = {
+      en: {
+        translation: {
+          nav_about: "About", nav_skills: "Skills", nav_experience: "Experience", nav_projects: "Projects", nav_certifications: "Certifications", nav_contact: "Contact",
+          hero_title: "Priyadarshana <span>Dadhich</span>",
+          hero_desc: "UI/UX Designer, Graphic Designer & AIML Developer creating modern digital experiences with creative visuals, branding, and AI-powered applications.",
+          hero_btn_projects: "View Projects", hero_btn_resume: "⬇ Download Resume", hero_btn_resume_success: "✔ Resume Downloaded",
+          about_title: "About <span>Me</span>",
+          about_p1: "I am a creative and detail-oriented professional with a strong foundation in visual design, strategic communication, and organizational leadership.",
+          about_p2: "I thrive at the intersection of human connection and creative strategy, focusing my passion on graphic design, brand marketing, human resources, and high-energy event coordination.",
+          about_p3: "With specialized hands-on experience designing engaging, audience-focused social media campaigns using tools like Canva and Adobe Photoshop, I love crafting cohesive brand identities that genuinely connect with people.",
+          about_p4: "Beyond design, my experience coordinating large-scale events has strengthened my skills in cross-team collaboration, logistical planning, leadership, and seamless project execution.",
+          about_p5: "Whether I am managing team dynamics, handling client relationships, or building creative marketing content, my goal is always to deliver impactful, human-centered, and visually memorable experiences.",
+          skills_title: "Professional <span>Skillset</span>",
+          skills_tech_h: "Technical Skills",
+          skills_tech_p: "<strong>Languages & Core:</strong><br>Python, JavaScript, SQL, C, Data Structures, Machine Learning.<br><br><strong>Web Development:</strong><br>HTML, CSS, React.js, Node.js, Express.js, MongoDB (MERN Stack).<br><br><strong>Libraries & Frameworks:</strong><br>Streamlit, OpenCV, pandas, NumPy, NLTK, scikit-learn.<br><br><strong>Tools & Databases:</strong><br>Git, PostgreSQL, Redis.",
+          skills_ui_h: "UI/UX Design", skills_ui_p: "User interface design, wireframing, prototyping, responsive layouts, and user experience design.",
+          skills_des_h: "Design & Marketing", skills_des_p: "Canva, Photoshop, Adobe Illustrator, Figma, branding, content creation, and visual communication.",
+          skills_ai_h: "AI & Machine Learning", skills_ai_p: "Chatbots, recommendation systems, NLP, computer vision, intelligent automation, and AI-powered applications.",
+          skills_soft_h: "Soft Skills & Leadership", skills_soft_p: "Communication, creativity, leadership, teamwork, team management, collaboration, presentation, client handling, time management, and self-improvement.<br><br><strong>Languages:</strong><br>English, Hindi",
+          skills_anim_h: "Frontend Animation", skills_anim_p: "GSAP, Anime.js, AOS, interactive UI effects, glassmorphism, 3D UI, and modern web animations.",
+          exp_title: "Work <span>Experience</span>",
+          exp1_h: "GenAI Trainee", exp1_sub: "ReGex Software Services, Jaipur", exp1_p: "Worked on AI-powered multilingual chatbots, Streamlit applications, PostgreSQL integration, and responsive UI systems.",
+          exp2_h: "Machine Learning Trainee", exp2_sub: "Acmegrade", exp2_p: "Built machine learning projects including recommendation systems, dashboards, and computer vision applications.",
+          exp3_h: "Event Coordinator", exp3_sub: "Resonance 2k25", exp3_p: "Managed event coordination, participant engagement, teamwork, and technical event operations.",
+          exp4_h: "Management Lead", exp4_sub: "Student Innovation Network — Cup of Excellence", exp4_p: "Led complete event management operations, sponsorship handling, logistics, and participant coordination. Successfully managed sponsors, coordinated teams, and ensured smooth workflow throughout the event. Received Certificate of Recommendation for leadership and management excellence.",
+          proj_title: "Featured <span>Projects</span>", proj_view: "View Project →", proj_view_des: "View Designs →",
+          proj1_tag: "AI Chatbot", proj1_p: "A multilingual AI chatbot built using Streamlit, Gemini/Gemma APIs, and PostgreSQL featuring persistent chat history, intelligent model switching, and a responsive modern interface.",
+          proj2_tag: "Full Stack AI", proj2_p: "Role-based workflow platform using Node.js, PostgreSQL, Redis, and AI chatbot support with sentiment analysis, attendance tracking, analytics, and workflow automation.",
+          proj3_tag: "MERN Stack", proj3_h: "Movie Review Website", proj3_p: "Full-stack MERN application with authentication, movie search, dynamic detail pages, review systems, and interactive user comments.",
+          proj4_tag: "Machine Learning", proj4_h: "Music Recommendation System", proj4_p: "Content-based recommendation engine using Python, pandas, NLTK, and scikit-learn with TF-IDF vectorization and cosine similarity algorithms.",
+          proj5_tag: "Web App", proj5_h: "Weather Dashboard", proj5_p: "Responsive weather application integrated with OpenWeatherMap API and geolocation services for real-time weather and 5-day forecasts.",
+          proj6_tag: "Frontend + GSAP", proj6_h: "Fake Currency Detection System", proj6_p: "Frontend simulation project with image upload, serial number validation, GSAP animations, local storage authentication, and interactive workflow UI.",
+          proj7_tag: "Computer Vision", proj7_h: "Face Detection System", proj7_p: "Real-time video stream face detection application built using Python, OpenCV, and Haar Cascade algorithms for efficient facial recognition.",
+          proj8_tag: "Branding", proj8_h: "Social Media Poster Designs", proj8_p: "Creative promotional posters, branding materials, and social media graphics designed using Canva and Photoshop for digital engagement campaigns.",
+          cert_title: "Certifications & <span>Achievements</span>",
+          cert_box_h: "Professional Certifications", cert_box_p: "<strong>NPTEL:</strong><br>Python for Data Science Certification.<br><br><strong>Infosys Certifications:</strong><br>Database Design & ER Modelling, C Programming, Python Programming.<br><br><strong>1stop.ai (Jul–Sep 2025):</strong><br>Internship Certificate, Project Completion Certificate, Cyber Security Participation.",
+          cert_award_h: "Awards", cert_award_p: "Secured <strong>1st Prize</strong> in Hardware Project Competition at JIET for innovative project development and technical presentation.",
+          cert_hack_h: "Hackathons", cert_hack_p: "Participated in <strong>Smart India Hackathon (SIH)</strong> showcasing innovation, teamwork, and problem-solving skills.",
+          cert_extra_h: "Extracurricular", cert_extra_p: "3 Raj NCC Cadet with participation in National Camp activities, leadership training, discipline, and team coordination.",
+          cert_lead_h: "Leadership & Management", cert_lead_p: "Recognized for leadership, event management, sponsor handling, and organizational excellence through multiple college and technical event initiatives.<br><br>Successfully managed teams, coordinated event workflows, and delivered impactful audience-focused experiences.",
+          contact_title: "Let's <span>Work</span> Together", contact_desc: "Available for UI/UX Design, Graphic Design, Branding, Freelance Projects, and Creative Collaborations.",
+          contact_btn: "Send Message",
+          place_name: "Your Name", place_email: "Your Email", place_msg: "Your Message",
+          footer_text: "© 2026 Priyadarshana Dadhich — UI/UX & Graphic Designer"
+        }
+      },
+      hi: {
+        translation: {
+          nav_about: "परिचय", nav_skills: "कौशल", nav_experience: "अनुभव", nav_projects: "परियोजनाएं", nav_certifications: "प्रमाणपत्र", nav_contact: "संपर्क",
+          hero_title: "प्रियदर्शना <span>दाधीच</span>",
+          hero_desc: "UI/UX डिज़ाइनर, ग्राफिक डिज़ाइनर और AIML डेवलपर जो रचनात्मक विज़ुअल्स, ब्रांडिंग और AI-संचालित एप्लिकेशन्स के साथ आधुनिक डिजिटल अनुभव बनाती हैं।",
+          hero_btn_projects: "परियोजनाएं देखें", hero_btn_resume: "⬇ रेज़्यूमे डाउनलोड करें", hero_btn_resume_success: "✔ रेज़्यूमे डाउनलोड हो गया",
+          about_title: "मेरे <span>बारे में</span>",
+          about_p1: "मैं विज़ुअल डिज़ाइन, रणनीतिक संचार और संगठनात्मक नेतृत्व में एक मजबूत नींव के साथ एक रचनात्मक और विस्तार-उन्मुख पेशेवर हूं।",
+          about_p2: "मैं मानव कनेक्शन और रचनात्मक रणनीति के चौराहे पर पनपती हूं, ग्राफिक डिज़ाइन, ब्रांड मार्केटिंग, मानव संसाधन और ऊर्जावान इवेंट समन्वय पर अपना ध्यान केंद्रित करती हूं।",
+          about_p3: "Canva और Adobe Photoshop जैसे टूल का उपयोग करके आकर्षक, दर्शक-केंद्रित सोशल मीडिया अभियान डिजाइन करने के विशेष व्यावहारिक अनुभव के साथ, मुझे सुसंगत ब्रांड पहचान बनाना पसंद है जो वास्तव में लोगों से जुड़ती है।",
+          about_p4: "डिजाइन के अलावा, बड़े पैमाने के कार्यक्रमों के समन्वय के मेरे अनुभव ने क्रॉस-टीम सहयोग, रसद योजना, नेतृत्व और निर्बाध परियोजना निष्पादन में मेरे कौशल को मजबूत किया है।",
+          about_p5: "चाहे मैं टीम की गतिशीलता का प्रबंधन कर रही हूं, ग्राहक संबंधों को संभाल रही हूं, या रचनात्मक विपणन सामग्री का निर्माण कर रही हूं, मेरा लक्ष्य हमेशा प्रभावशाली, मानव-केंद्रित और विज़ुअली यादगार अनुभव प्रदान करना है।",
+          skills_title: "व्यावसायिक <span>कौशल</span>",
+          skills_tech_h: "तकनीकी कौशल",
+          skills_tech_p: "<strong>भाषाएं और कोर:</strong><br>Python, JavaScript, SQL, C, डेटा स्ट्रक्चर्स, मशीन लर्निंग।<br><br><strong>वेब डेवलपमेंट:</strong><br>HTML, CSS, React.js, Node.js, Express.js, MongoDB (MERN स्टैक)।<br><br><strong>लाइब्रेरी और फ्रेमवर्क:</strong><br>Streamlit, OpenCV, pandas, NumPy, NLTK, scikit-learn.<br><br><strong>टूल और डेटाबेस:</strong><br>Git, PostgreSQL, Redis.",
+          skills_ui_h: "UI/UX डिज़ाइन", skills_ui_p: "यूज़र इंटरफ़ेस डिज़ाइन, वायरफ़्रेमिंग, प्रोटोटाइपिंग, रिस्पॉन्सिव लेआउट और यूज़र एक्सपीरियंस डिज़ाइन।",
+          skills_des_h: "डिज़ाइन और मार्केटिंग", skills_des_p: "Canva, Photoshop, Adobe Illustrator, Figma, ब्रांडिंग, कंटेंट क्रिएशन और विज़ुअल कम्युनिकेशन।",
+          skills_ai_h: "AI और मशीन लर्निंग", skills_ai_p: "चैटबॉट्स, रिकमेंडेशन सिस्टम, NLP, कंप्यूटर विज़न, इंटेलिजेंट ऑटोमेशन और AI-संचालित एप्लिकेशन।",
+          skills_soft_h: "सॉफ्ट स्किल्स और नेतृत्व", skills_soft_p: "संचार, रचनात्मकता, नेतृत्व, टीमवर्क, टीम प्रबंधन, सहयोग, प्रस्तुति, क्लाइंट हैंडलिंग, समय प्रबंधन और आत्म-सुधार।<br><br><strong>भाषाएं:</strong><br>अंग्रेजी, हिंदी",
+          skills_anim_h: "फ्रंटएंड एनिमेशन", skills_anim_p: "GSAP, Anime.js, AOS, इंटरैक्टिव UI प्रभाव, ग्लासमोर्फिज्म, 3D UI और आधुनिक वेब एनिमेशन।",
+          exp_title: "कार्य <span>अनुभव</span>",
+          exp1_h: "GenAI ट्रेनी", exp1_sub: "Regex सॉफ्टवेयर सर्विसेज, जयपुर", exp1_p: "AI-संचालित बहुभाषी चैटबॉट्स, Streamlit एप्लिकेशन्स, PostgreSQL इंटीग्रेशन और रिस्पॉन्सिव UI सिस्टम पर काम किया।",
+          exp2_h: "मशीन लर्निंग ट्रेनी", exp2_sub: "Acmegrade", exp2_p: "सिफारिश प्रणाली, डैशबोर्ड और कंप्यूटर विज़न अनुप्रयोगों सहित मशीन लर्निंग परियोजनाओं का निर्माण किया।",
+          exp3_h: "इवेंट समन्वयक", exp3_sub: "Resonance 2k25", exp3_p: "इवेंट समन्वय, प्रतिभागी जुड़ाव, टीमवर्क और तकनीकी इवेंट संचालन का प्रबंधन किया।",
+          exp4_h: "प्रबंधन प्रमुख", exp4_sub: "स्टूडेंट इनोवेशन नेटवर्क — कप ऑफ एक्सीलेंस", exp4_p: "संपूर्ण इवेंट प्रबंधन संचालन, प्रायोजन प्रबंधन, रसद और प्रतिभागी समन्वय का नेतृत्व किया। प्रायोजकों को सफलतापूर्वक प्रबंधित किया, टीमों का समन्वय किया और पूरे कार्यक्रम में सुचारू कार्यप्रवाह सुनिश्चित किया। नेतृत्व और प्रबंधन उत्कृष्टता के लिए अनुशंसा प्रमाण पत्र प्राप्त हुआ।",
+          proj_title: "प्रमुख <span>परियोजनाएं</span>", proj_view: "परियोजना देखें →", proj_view_des: "डिजाइन देखें →",
+          proj1_tag: "AI चैटबॉट", proj1_p: "Streamlit, Gemini/Gemma APIs और PostgreSQL का उपयोग करके बनाया गया एक बहुभाषी AI चैटबॉट जिसमें लगातार चैट इतिहास, इंटेलिजेंट मॉडल स्विचिंग और एक रिस्पॉन्सिव आधुनिक इंटरफ़ेस शामिल है।",
+          proj2_tag: "फुल स्टैक AI", proj2_p: "Node.js, PostgreSQL, Redis और AI चैटबॉट सपोर्ट का उपयोग करके रोल-बेस्ड वर्कफ़्लो प्लेटफ़ॉर्म जिसमें सेंटिमेंट एनालिसिस, अटेंडेंस ट्रैकिंग, एनालिटिक्स और वर्कफ़्लो ऑटोमेशन है।",
+          proj3_tag: "MERN स्टैक", proj3_h: "मूवी रिव्यू वेबसाइट", proj3_p: "प्रमाणीकरण, मूवी खोज, गतिशील विवरण पृष्ठों, समीक्षा प्रणालियों और इंटरैक्टिव उपयोगकर्ता टिप्पणियों के साथ पूर्ण-स्टैक MERN एप्लिकेशन।",
+          proj4_tag: "मशीन लर्निंग", proj4_h: "म्यूजिक रिकमेंडेशन सिस्टम", proj4_p: "Python, pandas, NLTK और scikit-learn का उपयोग करके TF-IDF वेक्टराइजेशन और कोसाइन सिमिलैरिटी एल्गोरिदम के साथ कंटेंट-बेस्ड रिकमेंडेशन इंजन।",
+          proj5_tag: "वेब ऐप", proj5_h: "मौसम डैशबोर्ड", proj5_p: "वास्तविक समय के मौसम और 5-दिन के पूर्वानुमान के लिए OpenWeatherMap API और जियोलोकेशन सेवाओं के साथ एकीकृत रिस्पॉन्सिव वेदर एप्लिकेशन।",
+          proj6_tag: "फ्रंटएंड + GSAP", proj6_h: "फर्जी मुद्रा पहचान प्रणाली", proj6_p: "इमेज अपलोड, सीरियल नंबर सत्यापन, GSAP एनिमेशन, लोकल स्टोरेज ऑथेंटिकेशन और इंटरैक्टिव वर्कफ़्लो UI के साथ फ्रंटएंड सिमुलेशन प्रोजेक्ट।",
+          proj7_tag: "कंप्यूटर विज़न", proj7_h: "चेहरा पहचान प्रणाली", proj7_p: "कुशल चेहरे की पहचान के लिए Python, OpenCV और Haar Cascade एल्गोरिदम का उपयोग करके बनाया गया रीयल-टाइम वीडियो स्ट्रीम फेस डिटेक्शन एप्लिकेशन।",
+          proj8_tag: "ब्रांडिंग", proj8_h: "सोशल मीडिया पोस्टर डिजाइन", proj8_p: "डिजिटल जुड़ाव अभियानों के लिए Canva और Photoshop का उपयोग करके डिज़ाइन किए गए रचनात्मक प्रचार पोस्टर, ब्रांडिंग सामग्री और सोशल मीडिया ग्राफिक्स।",
+          cert_title: "प्रमाणपत्र और <span>उपलब्धियां</span>",
+          cert_box_h: "व्यावसायिक प्रमाणपत्र", cert_box_p: "<strong>NPTEL:</strong><br>डेटा साइंस के लिए पायथन प्रमाणपत्र।<br><br><strong>Infosys प्रमाणपत्र:</strong><br>डेटाबेस डिज़ाइन और ईआर मॉडलिंग, सी प्रोग्रामिंग, पायथन प्रोग्रामिंग।<br><br><strong>1stop.ai (जुलाई-सितंबर 2025):</strong><br>इंटर्नशिप प्रमाणपत्र, प्रोजेक्ट पूरा होने का प्रमाणपत्र, साइबर सुरक्षा भागीदारी।",
+          cert_award_h: "पुरस्कार", cert_award_p: "रचनात्मक परियोजना विकास और तकनीकी प्रस्तुति के लिए JIET में हार्डवेयर परियोजना प्रतियोगिता में <strong>प्रथम पुरस्कार</strong> प्राप्त किया।",
+          cert_hack_h: "हैकाथॉन", cert_hack_p: "नवाचार, टीमवर्क और समस्या सुलझाने के कौशल का प्रदर्शन करते हुए <strong>स्मार्ट इंडिया हैकाथॉन (SIH)</strong> में भाग लिया।",
+          cert_extra_h: "इतरेतर गतिविधियाँ", cert_extra_p: "राष्ट्रीय शिविर गतिविधियों, नेतृत्व प्रशिक्षण, अनुशासन और टीम समन्वय में भागीदारी के साथ 3 राज एनसीसी कैडेट।",
+          cert_lead_h: "नेतृत्व और प्रबंधन", cert_lead_p: "कई कॉलेज और तकनीकी इवेंट पहलों के माध्यम से नेतृत्व, इवेंट प्रबंधन, प्रायोजक प्रबंधन और संगठनात्मक उत्कृष्टता के लिए मान्यता प्राप्त।<br><br>सफलतापूर्वक टीमों का प्रबंधन किया, इवेंट वर्कफ़्लो का समन्वय किया और प्रभावशाली दर्शक-केंद्रित अनुभव प्रदान किए।",
+          contact_title: "चलो साथ <span>काम</span> करते हैं", contact_desc: "UI/UX डिज़ाइन, ग्राफिक डिज़ाइन, ब्रांडिंग, फ्रीलांस प्रोजेक्ट और रचनात्मक सहयोग के लिए उपलब्ध।",
+          contact_btn: "संदेश भेजें",
+          place_name: "आपका नाम", place_email: "आपका ईमेल", place_msg: "आपका संदेश",
+          footer_text: "© 2026 प्रियदर्शना दाधीच — UI/UX और ग्राफिक डिज़ाइनर"
+        }
+      },
+      ja: {
+        translation: {
+          nav_about: "自己紹介", nav_skills: "スキル", nav_experience: "経歴", nav_projects: "実績", nav_certifications: "資格・受賞", nav_contact: "連絡先",
+          hero_title: "Priyadarshana <span>Dadhich</span>",
+          hero_desc: "UI/UXデザイナー、グラフィックデザイナー、AIMLデベロッパー。クリエイティブな視覚表現、ブランディング、AIを活用したアプリケーションで現代的なデジタル体験を構築しています。",
+          hero_btn_projects: "プロジェクトを見る", hero_btn_resume: "⬇ 履歴書をダウンロード", hero_btn_resume_success: "✔ ダウンロード完了",
+          about_title: "自己<span>紹介</span>",
+          about_p1: "私は、ビジュアルデザイン、戦略的コミュニケーション、組織的リーダーシップの強固な基盤を持つ、クリエイティブで細部にこだわる専門家です。",
+          about_p2: "人と人とのつながりと創造的な戦略の交差点で力を発揮し、グラフィックデザイン、ブランドマーケティング、人事、そして熱量のあるイベント運営に情熱を注いでいます。",
+          about_p3: "CanvaやAdobe Photoshopなどのツールを使用して、魅力的でターゲットに合わせたソーシャルメディアキャンペーンを設計した豊富な実務経験があり、人々と純粋につながる一貫したブランドアイデンティティを作り出すことが得意です。",
+          about_p4: "デザインの枠を超え、大規模なイベントをコーディネートした経験により、クロスチームでのコラボレーション、物流計画、リーダーシップ、そしてシームレスなプロジェクト遂行のスキルが磨かれました。",
+          about_p5: "チームのダイナミクス管理、クライアント対応、クリエイティブなマーケティングコンテンツの構築など、私の目標は常に、インパクトがあり、人間中心で、視覚的に記憶に残る体験を提供することです。",
+          skills_title: "専門的な<span>スキルセット</span>",
+          skills_tech_h: "テクニカルスキル",
+          skills_tech_p: "<strong>開発言語 & コア:</strong><br>Python, JavaScript, SQL, C, データ構造, 機械学習。<br><br><strong>ウェブ開発:</strong><br>HTML, CSS, React.js, Node.js, Express.js, MongoDB (MERNスタック)。<br><br><strong>ライブラリ & フレームワーク:</strong><br>Streamlit, OpenCV, pandas, NumPy, NLTK, scikit-learn。<br><br><strong>ツール & データベース:</strong><br>Git, PostgreSQL, Redis.",
+          skills_ui_h: "UI/UXデザイン", skills_ui_p: "ユーザーインターフェースデザイン、ワイヤーフレーム、プロトタイピング、レスポンシブレイアウト、ユーザー体験設計。",
+          skills_des_h: "デザイン & マーケティング", skills_des_p: "Canva, Photoshop, Adobe Illustrator, Figma, ブランディング, コンテンツ制作, 視覚的コミュニケーション。",
+          skills_ai_h: "AI & 機械学習", skills_ai_p: "チャットボット, 推薦システム, 自然言語処理(NLP), コンピュータビジョン, インテリジェント自動化, AIアプリケーション。",
+          skills_soft_h: "ソフトスキル & リーダーシップ", skills_soft_p: "コミュニケーション, 創造性, リーダーシップ, チームワーク, チーム管理, 協調性, プレゼンテーション, クライアント対応, 時間管理, 自己啓発。<br><br><strong>対応言語:</strong><br>英語, ヒンディー語",
+          skills_anim_h: "フロントエンド・アニメーション", skills_anim_p: "GSAP, Anime.js, AOS, インタラクティブUI効果, グラスモフィズム, 3D UI, モダンウェブアニメーション。",
+          exp_title: "職務<span>経歴</span>",
+          exp1_h: "GenAI インターン", exp1_sub: "ReGex Software Services（ジャイプール）", exp1_p: "AI搭載の多言語チャットボット、Streamlitアプリケーション、PostgreSQLの統合、およびレスポンシブなUIシステムの構築に従事。",
+          exp2_h: "機械学習インターン", exp2_sub: "Acmegrade", exp2_p: "推薦システム、ダッシュボード、コンピュータビジョンアプリケーションを含む機械学習プロジェクトを構築。",
+          exp3_h: "イベントコーディネーター", exp3_sub: "Resonance 2k25", exp3_p: "イベントの運営、参加者のエンゲージメント、チームワーク、およびテクニカルイベントの業務管理を担当。",
+          exp4_h: "マネジメントリード", exp4_sub: "Student Innovation Network — Cup of Excellence", exp4_p: "イベント管理運営全般、スポンサー対応、物流、参加者調整を統括。チームを編成し、イベント全体の円滑なワークフローを確保。リーダーシップと運営の卓越性を認められ、推薦状を授与されました。",
+          proj_title: "主要<span>プロジェクト</span>", proj_view: "プロジェクトを見る →", proj_view_des: "デザインを見る →",
+          proj1_tag: "AIチャットボット", proj1_p: "Streamlit、Gemini/Gemma API、PostgreSQLを使用して構築された多言語AIチャットボット。永続的なチャット履歴、インテリジェントなモデル切り替え、レスポンシブでモダンなインターフェースを搭載。",
+          proj2_tag: "フルスタックAI", proj2_p: "Node.js、PostgreSQL、Redis、およびAIチャットボットサポートを使用した役割ベースのワークフロープラットフォーム。感情分析、出席追跡、データ分析、業務の自動化を実装。",
+          proj3_tag: "MERNスタック", proj3_h: "映画レビューウェブサイト", proj3_p: "認証、映画検索、動的な詳細ページ、レビューシステム、インタラクティブなユーザーコメント機能を備えたフルスタックMERNアプリケーション。",
+          proj4_tag: "機械学習", proj4_h: "音楽推薦システム", proj4_p: "Python、pandas、NLTK、scikit-learnを使用し、TF-IDFベクトル化とコサイン類似度アルゴリズムを組み込んだコンテンツベースの推薦エンジン。",
+          proj5_tag: "ウェブアプリ", proj5_h: "天気予報ダッシュボード", proj5_p: "OpenWeatherMap APIと位置情報サービスを統合し、リアルタイムの天気と5日間の予報を表示するレスポンシブな天気アプリケーション。",
+          proj6_tag: "フロントエンド + GSAP", proj6_h: "偽札検知シミュレーション", proj6_p: "画像アップロード、シリアル番号検証、GSAPアニメーション、ローカルストレージ認証、インタラクティブなUIを備えたフロントエンド模擬プロジェクト。",
+          proj7_tag: "コンピュータビジョン", proj7_h: "顔認識システム", proj7_p: "Python、OpenCV、Haar Cascadeアルゴリズムを使用して、効率的な顔認識を実現するリアルタイム映像ストリーム顔検出アプリケーション。",
+          proj8_tag: "ブランディング", proj8_h: "ソーシャルメディア・ポスターデザイン", proj8_p: "CanvaとPhotoshopを駆使し、デジタルエンゲージメントキャンペーン用に制作されたクリエイティブなプロモーションポスター、ブランディング資材、グラフィック。",
+          cert_title: "資格 & <span>受賞歴</span>",
+          cert_box_h: "プロフェッショナル資格", cert_box_p: "<strong>NPTEL:</strong><br>Python for Data Science 認定資格。<br><br><strong>Infosys 認定資格:</strong><br>データベース設計 & ERモデリング, C言語プログラミング, Pythonプログラミング。<br><br><strong>1stop.ai (2025年7月〜9月):</strong><br>インターンシップ修了証明書, プロジェクト完了証明書, サイバーセキュリティ参加証明書。",
+          cert_award_h: "受賞歴", cert_award_p: "JIETで開催されたハードウェアプロジェクトコンペティションにて、革新的なプロジェクト開発と技術的なプレゼンテーションが評価され、<strong>第1位</strong>を獲得。",
+          cert_hack_h: "ハッカソン", cert_hack_p: "<strong>Smart India Hackathon (SIH)</strong> に参加し、イノベーション、チームワーク、問題解決能力を発揮。",
+          cert_extra_h: "課外活動", cert_extra_p: "3 Raj NCC（学校現場の士官候補生部隊）に所属し、全国キャンプ活動、リーダーシップトレーニング、規律、チームコーディネーションに参加。",
+          cert_lead_h: "リーダーシップ & マネジメント", cert_lead_p: "複数の大学イベントおよび技術イニシアチブを通じて、リーダーシップ、イベント管理、スポンサー獲得、および組織的な卓越性が認められました。<br><br>チームを適切に統率し、ワークフローを調整して、ターゲットに響く体験を提供しました。",
+          contact_title: "一緒に<span>働きましょう</span>", contact_desc: "UI/UXデザイン、グラフィックデザイン、ブランディング、フリーランスのご依頼、クリエイティブなコラボレーションを承っています。",
+          contact_btn: "メッセージを送信",
+          place_name: "お名前", place_email: "メールアドレス", place_msg: "メッセージ内容",
+          footer_text: "© 2026 Priyadarshana Dadhich — UI/UX & Graphic Designer"
+        }
+      },
+      ru: {
+        translation: {
+          nav_about: "О себе", nav_skills: "Навыки", nav_experience: "Опыт", nav_projects: "Проекты", nav_certifications: "Сертификаты", nav_contact: "Контакты",
+          hero_title: "Приядаршана <span>Дадич</span>",
+          hero_desc: "UI/UX дизайнер, графический дизайнер и AIML-разработчик, создающий современные цифровые решения с использованием креативного визуала, брендинга и приложений на базе ИИ.",
+          hero_btn_projects: "Смотреть проекты", hero_btn_resume: "⬇ Скачать резюме", hero_btn_resume_success: "✔ Резюме скачано",
+          about_title: "Обо <span>мне</span>",
+          about_p1: "Я творческий и внимательный к деталям профессионал с прочной основой в области визуального дизайна, стратегических коммуникаций и организационного лидерства.",
+          about_p2: "Я развиваюсь на стыке человеческих взаимоотношений и творческой стратегии, посвящая себя графическому дизайну, бренд-маркетингу, управлению персоналом и высокодинамичной координации мероприятий.",
+          about_p3: "Обладая специализированным практическим опытом разработки увлекательных, ориентированных на аудиторию кампаний в социальных сетях с использованием таких инструментов, как Canva и Adobe Photoshop, я люблю создавать целостную айдентику брендов, которая искренне находит отклик у людей.",
+          about_p4: "Помимо дизайна, мой опыт координации масштабных мероприятий укрепил мои навыки в области межкомандного взаимодействия, логистического планирования, лидерства и безупречного исполнения проектов.",
+          about_p5: "Независимо от того, управляю ли я динамикой команды, выстраиваю отношения с клиентами или создаю креативный маркетинговый контент, моя цель всегда — создавать впечатляющий, человекоцентричный и визуально запоминающийся опыт.",
+          skills_title: "Профессиональные <span>навыки</span>",
+          skills_tech_h: "Технические навыки",
+          skills_tech_p: "<strong>Языки и база:</strong><br>Python, JavaScript, SQL, C, структуры данных, машинное обучение.<br><br><strong>Веб-разработка:</strong><br>HTML, CSS, React.js, Node.js, Express.js, MongoDB (стек MERN).<br><br><strong>Библиотеки и фреймворки:</strong><br>Streamlit, OpenCV, pandas, NumPy, NLTK, scikit-learn.<br><br><strong>Инструменты и БД:</strong><br>Git, PostgreSQL, Redis.",
+          skills_ui_h: "UI/UX дизайн", skills_ui_p: "Проектирование пользовательских интерфейсов, создание варфреймов, прототипирование, адаптивная верстка и дизайн пользовательского опыта.",
+          skills_des_h: "Дизайн и маркетинг", skills_des_p: "Canva, Photoshop, Adobe Illustrator, Figma, брендинг, создание контента и визуальные коммуникации.",
+          skills_ai_h: "ИИ и машинное обучение", skills_ai_p: "Чат-боты, рекомендательные системы, обработка естественного языка (NLP), компьютерное зрение, интеллектуальная автоматизация и ИИ-приложения.",
+          skills_soft_h: "Гибкие навыки и лидерство", skills_soft_p: "Коммуникация, креативность, лидерство, работа в команде, управление проектами, презентация, работа с клиентами, тайм-менеджмент и самосовершенствование.<br><br><strong>Языки:</strong><br>Английский, Хинди",
+          skills_anim_h: "Анимация интерфейсов", skills_anim_p: "GSAP, Anime.js, AOS, интерактивные эффекты пользовательского интерфейса, глассморфизм, 3D-интерфейсы и современная веб-анимация.",
+          exp_title: "Опыт <span>работы</span>",
+          exp1_h: "Стажер GenAI", exp1_sub: "ReGex Software Services, Джайпур", exp1_p: "Работала над многоязычными чат-ботами на базе ИИ, приложениями Streamlit, интеграцией PostgreSQL и адаптивными системами интерфейса.",
+          exp2_h: "Стажер по машинному обучению", exp2_sub: "Acmegrade", exp2_p: "Разрабатывала проекты в области машинного обучения, включая рекомендательные системы, дашборды и приложения компьютерного зрения.",
+          exp3_h: "Координатор мероприятий", exp3_sub: "Resonance 2k25", exp3_p: "Управляла координацией мероприятий, вовлечением участников, командной работой и технической поддержкой событий.",
+          exp4_h: "Руководитель по менеджменту", exp4_sub: "Student Innovation Network — Cup of Excellence", exp4_p: "Руководила всеми процессами управления мероприятиями, работой со спонсорами, логистикой и координацией участников. Успешно управляла спонсорскими пакетами, координировала команды и обеспечивала бесперебойный рабочий процесс. Получила рекомендательное письмо за выдающиеся успехи в лидерстве.",
+          proj_title: "Избранные <span>проекты</span>", proj_view: "Смотреть проект →", proj_view_des: "Смотреть дизайн →",
+          proj1_tag: "ИИ Чат-бот", proj1_p: "Многоязычный чат-бот на базе ИИ, созданный с использованием Streamlit, API Gemini/Gemma и PostgreSQL. Поддерживает историю чата, интеллектуальное переключение моделей и современный адаптивный интерфейс.",
+          proj2_tag: "Full Stack AI", proj2_p: "Платформа автоматизации рабочих процессов на основе ролей с использованием Node.js, PostgreSQL, Redis и интеграцией ИИ-чат-бота. Включает анализ тональности, отслеживание посещаемости и аналитику.",
+          proj3_tag: "Стек MERN", proj3_h: "Сайт отзывов о фильмах", proj3_p: "Полнофункциональное MERN-приложение с авторизацией, поиском фильмов, динамическими страницами описания, системой отзывов и интерактивными комментариями.",
+          proj4_tag: "Машинное обучение", proj4_h: "Рекомендательная система музыки", proj4_p: "Контентная рекомендательная система на Python с использованием pandas, NLTK и scikit-learn с векторизацией TF-IDF и алгоритмами косинусного сходства.",
+          proj5_tag: "Веб-приложение", proj5_h: "Панель погоды", proj5_p: "Адаптивное погодное приложение, интегрированное с OpenWeatherMap API и службами геолокации для отображения погоды в реальном времени и прогноза на 5 дней.",
+          proj6_tag: "Фронтенд + GSAP", proj6_h: "Система симуляции проверки валют", proj6_p: "Фронтенд-проект симуляции с загрузкой изображений, валидацией серийных номеров, анимацией GSAP, авторизацией через локальное хранилище и интерактивным интерфейсом.",
+          proj7_tag: "Компьютерное зрение", proj7_h: "Система распознавания лиц", proj7_p: "Приложение для обнаружения лиц в режиме реального времени в видеопотоке, созданное с использованием Python, OpenCV и алгоритмов Haar Cascade.",
+          proj8_tag: "Брендинг", proj8_h: "Дизайн постеров для соцсетей", proj8_p: "Креативные рекламные постеры, материалы для брендинга и графика для социальных сетей, разработанные в Canva и Photoshop для цифровых маркетинговых кампаний.",
+          cert_title: "Сертификаты и <span>достижения</span>",
+          cert_box_h: "Профессиональные сертификаты", cert_box_p: "<strong>NPTEL:</strong><br>Сертификат по Python для анализа данных.<br><br><strong>Сертификаты Infosys:</strong><br>Проектирование баз данных и ER-моделирование, программирование на C, программирование на Python.<br><br><strong>1stop.ai (Июль–Сентябрь 2025):</strong><br>Сертификат о прохождении стажировки, сертификат о завершении проекта, участие в программе по кибербезопасности.",
+          cert_award_h: "Награды", cert_award_p: "Заняла <strong>1-е место</strong> в конкурсе аппаратных проектов в JIET за инновационную разработку и техническую презентацию проекта.",
+          cert_hack_h: "Хакатоны", cert_hack_p: "Принимала участие в <strong>Smart India Hackathon (SIH)</strong>, продемонстрировав навыки инноваций, командной работы и решения сложных задач.",
+          cert_extra_h: "Внеучебная деятельность", cert_extra_p: "Кадет 3 Радж NCC, активный участник национальных лагерей, тренингов по лидерству, дисциплине и координации команд.",
+          cert_lead_h: "Лидерство и менеджмент", cert_lead_p: "Отмечена за лидерские качества, управление мероприятиями, ведение спонсоров и организационное мастерство в рамках многочисленных студенческих и технических инициатив.<br><br>Успешно руководила командами, координировала рабочие процессы мероприятий и создавала яркие впечатления для аудитории.",
+          contact_title: "Давайте <span>работать</span> вместе", contact_desc: "Доступна для заказов по UI/UX дизайну, графическому дизайну, брендингу, фриланс-проектам и творческому сотрудничеству.",
+          contact_btn: "Отправить сообщение",
+          place_name: "Ваше имя", place_email: "Ваш Email", place_msg: "Ваше сообщение",
+          footer_text: "© 2026 Приядаршана Дадич — UI/UX и графический дизайнер"
+        }
+      },
+      ko: {
+        translation: {
+          nav_about: "소개", nav_skills: "기술", nav_experience: "경력", nav_projects: "프로젝트", nav_certifications: "자격 및 수상", nav_contact: "연락처",
+          hero_title: "Priyadarshana <span>Dadhich</span>",
+          hero_desc: "UI/UX 디자이너, 그래픽 디자이너 및 AIML 개발자로서 창의적인 비주얼, 브랜딩, AI 기반 애플리케이션을 결합한 현대적인 디지털 경험을 창조하고 있습니다.",
+          hero_btn_projects: "프로젝트 보기", hero_btn_resume: "⬇ 이력서 다운로드", hero_btn_resume_success: "✔ 이력서 다운로드 완료",
+          about_title: "자기<span>소개</span>",
+          about_p1: "저는 시각 디자인, 전략적 커뮤니케이션, 조직적 리더십에 탄탄한 기반을 둔 창의적이고 디테일 중심의 전문가입니다.",
+          about_p2: "사람 간의 연결과 크리에이티브 전략의 교차점에서 역량을 발휘하며, 그래픽 디자인, 브랜드 마케팅, 인사 관리(HR), 활기찬 이벤트 기획 및 조율에 열정을 쏟고 있습니다.",
+          about_p3: "Canva 및 Adobe Photoshop 등의 툴을 활용하여 매력적이고 타깃 중심적인 소셜 미디어 캠페인을 디자인한 전문적인 실무 경험을 바탕으로, 사람들의 마음을 진정으로 움직이는 일관성 있는 브랜드 아이덴티티 구축을 지향합니다.",
+          about_p4: "디자인 외에도 대규모 이벤트를 총괄 조율한 경험을 통해 크로스 팀 협업, 물류 기획, 리더십 및 유기적인 프로젝트 실행 능력을 탄탄하게 다졌습니다.",
+          about_p5: "팀의 역동성을 관리하거나, 클라이언트 관계를 조율하거나, 크리에이티브한 마케팅 콘텐츠를 구축할 때, 저의 목표는 언제나 임팩트 있고 인간 중심적이며 시각적으로 오랫동안 기억에 남는 경험을 선사하는 것입니다.",
+          skills_title: "전문 <span>기술 스택</span>",
+          skills_tech_h: "기술 스택",
+          skills_tech_p: "<strong>개발 언어 & 핵심:</strong><br>Python, JavaScript, SQL, C, 자료구조, 머신러닝.<br><br><strong>웹 개발:</strong><br>HTML, CSS, React.js, Node.js, Express.js, MongoDB (MERN 스택).<br><br><strong>라이브러리 & 프레임워크:</strong><br>Streamlit, OpenCV, pandas, NumPy, NLTK, scikit-learn.<br><br><strong>툴 & 데이터베이스:</strong><br>Git, PostgreSQL, Redis.",
+          skills_ui_h: "UI/UX 디자인", skills_ui_p: "사용자 인터페이스(UI) 디자인, 와이어프레임 작성, 프로토타이핑, 반응형 레이아웃 및 사용자 경험(UX) 설계.",
+          skills_des_h: "디자인 & 마케팅", skills_des_p: "Canva, Photoshop, Adobe Illustrator, Figma, 브랜딩, 콘텐츠 제작 및 시각적 커뮤니케이션.",
+          skills_ai_h: "AI & 머신러닝", skills_ai_p: "챗봇, 추천 시스템, 자연어 처리(NLP), 컴퓨터 비전, 지능형 자동화 및 AI 기반 애플리케이션 개발.",
+          skills_soft_h: "소프트 스킬 & 리더십", skills_soft_p: "커뮤니케이션, 창의성, 리더십, 팀워크, 팀 관리, 협업, 프레젠테이션, 클라이언트 대응, 시간 관리 및 자기 계발.<br><br><strong>사용 언어:</strong><br>영어, 힌디어",
+          skills_anim_h: "프론트엔드 애니메이션", skills_anim_p: "GSAP, Anime.js, AOS, 인터랙티브 UI 효과, 글래스모피즘, 3D UI 및 모던 웹 애니메이션.",
+          exp_title: "업무 <span>경력</span>",
+          exp1_h: "생성형 AI(GenAI) 교육생", exp1_sub: "ReGex Software Services, 자이푸르", exp1_p: "AI 기반 다국어 챗봇, Streamlit 애플리케이션, PostgreSQL 연동 및 반응형 UI 시스템 구축 업무 수행.",
+          exp2_h: "머신러닝 교육생", exp2_sub: "Acmegrade", exp2_p: "추천 시스템, 대시보드 및 컴퓨터 비전 애플리케이션을 포함한 머신러닝 프로젝트 구축.",
+          exp3_h: "이벤트 코디네이터", exp3_sub: "Resonance 2k25", exp3_p: "이벤트 기획 조율, 참가자 인게이지먼트 유도, 팀워크 유지 및 기술 이벤트 운영 관리.",
+          exp4_h: "매니지먼트 리드", exp4_sub: "Student Innovation Network — Cup of Excellence", exp4_p: "전반적인 이벤트 관리 운영, 스폰서십 조율, 물류 및 참가자 관리를 총괄 리드함. 스폰서 관리를 성공적으로 수행하고 팀워크를 조율하여 행사 전반에 걸쳐 원활한 워크플로우를 보장함. 리더십과 운영 탁월성을 인정받아 추천서를 수여받음.",
+          proj_title: "주요 <span>프로젝트</span>", proj_view: "프로젝트 보기 →", proj_view_des: "디자인 보기 →",
+          proj1_tag: "AI 챗봇", proj1_p: "Streamlit, Gemini/Gemma API, PostgreSQL을 활용하여 구축한 다국어 AI 챗봇으로, 지속적인 채팅 기록 보존, 지능형 모델 전환 및 반응형 모던 인터페이스를 제공합니다.",
+          proj2_tag: "풀스택 AI", proj2_p: "Node.js, PostgreSQL, Redis 및 AI 챗봇 지원을 결합한 역할 기반 워크플로우 플랫폼으로, 감성 분석, 출석 추적, 분석 및 워크플로우 자동화를 구현했습니다.",
+          proj3_tag: "MERN 스택", proj3_h: "영화 리뷰 웹사이트", proj3_p: "사용자 인증, 영화 검색, 동적 상세 페이지, 리뷰 시스템 및 인터랙티브 사용자 댓글 기능을 갖춘 풀스택 MERN 애플리케이션입니다.",
+          proj4_tag: "머신러닝", proj4_h: "음악 추천 시스템", proj4_p: "Python, pandas, NLTK 및 scikit-learn을 사용하고 TF-IDF 벡터화와 코사인 유사도 알고리즘을 적용한 콘텐츠 기반 추천 엔진입니다.",
+          proj5_tag: "웹 앱", proj5_h: "날씨 대시보드", proj5_p: "OpenWeatherMap API 및 위치 정보 서비스와 연동하여 실시간 날씨 정보와 5일간의 일기예보를 제공하는 반응형 날씨 애플리케이션입니다.",
+          proj6_tag: "프론트엔드 + GSAP", proj6_h: "위조지폐 감지 시뮬레이션 시스템", proj6_p: "이미지 업로드, 일련번호 검증, GSAP 애니메이션, 로컬 스토리지를 활용한 사용자 인증 및 인터랙티브 워크플로우 UI를 포함하는 프론트엔드 시뮬레이션 프로젝트입니다.",
+          proj7_tag: "컴퓨터 비전", proj7_h: "얼굴 인식 시스템", proj7_p: "Python, OpenCV 및 Haar Cascade 알고리즘을 활용하여 효율적인 안면 인식을 구현한 실시간 비디오 스트림 얼굴 감지 애플리케이션입니다.",
+          proj8_tag: "브랜딩", proj8_h: "소셜 미디어 포스터 디자인", proj8_p: "디지털 홍보 캠페인을 위해 Canva 및 Photoshop을 활용하여 제작한 창의적인 홍보용 포스터, 브랜딩 자재 및 소셜 미디어 그래픽 디자인입니다.",
+          cert_title: "자격 및 <span>수상 내역</span>",
+          cert_box_h: "전문 자격증", cert_box_p: "<strong>NPTEL:</strong><br>데이터 과학을 위한 Python 자격증.<br><br><strong>Infosys 자격증:</strong><br>데이터베이스 설계 & ER 모델링, C 프로그래밍, Python 프로그래밍.<br><br><strong>1stop.ai (2025년 7월-9월):</strong><br>인턴십 수료증, 프로젝트 완료 증명서, 사이버 보안 프로그램 참가 증서.",
+          cert_award_h: "수상 경력", cert_award_p: "혁신적인 프로젝트 개발과 기술적인 발표 역량을 인정받아 JIET 하드웨어 프로젝트 경진대회에서 <strong>1위(최우수상)</strong>를 수상함.",
+          cert_hack_h: "해커톤", cert_hack_p: "<strong>Smart India Hackathon (SIH)</strong>에 참가하여 혁신성, 팀워크 및 뛰어난 문제 해결 능력을 보여줌.",
+          cert_extra_h: "대외 활동", cert_extra_p: "3 Raj NCC 카뎃으로 활동하며 국가 캠프 활동 참여, 리더십 트레이닝 이수, 규율 확립 및 팀 조율력을 함양함.",
+          cert_lead_h: "리더십 & 매니지먼트", cert_lead_p: "다양한 대학 및 기술 행사 이니셔티브를 통해 리더십, 행사 기획 관리, 스폰서 유치 조율 및 조직적 탁월성을 인정받음.<br><br>팀을 성공적으로 관리하고, 행사 워크플로우를 유기적으로 조율하며, 관객 중심의 임팩트 있는 경험을 만들어 냄.",
+          contact_title: "함께 <span>협업합시다</span>", contact_desc: "UI/UX 디자인, 그래픽 디자인, 브랜딩, 프리랜서 프로젝트 및 크리에이티브 협업 제안을 환영합니다.",
+          contact_btn: "메시지 보내기",
+          place_name: "이름", place_email: "이메일 주소", place_msg: "메시지 내용",
+          footer_text: "© 2026 Priyadarshana Dadhich — UI/UX & Graphic Designer"
+        }
+      },
+      es: {
+        translation: {
+          nav_about: "Sobre mí", nav_skills: "Habilidades", nav_experience: "Experiencia", nav_projects: "Proyectos", nav_certifications: "Certificaciones", nav_contact: "Contacto",
+          hero_title: "Priyadarshana <span>Dadhich</span>",
+          hero_desc: "Diseñadora de UI/UX, Diseñadora Gráfica y Desarrolladora de AIML que crea experiencias digitales modernas con visuales creativos, branding y aplicaciones impulsadas por IA.",
+          hero_btn_projects: "Ver Proyectos", hero_btn_resume: "⬇ Descargar Currículum", hero_btn_resume_success: "✔ Descargado con éxito",
+          about_title: "Sobre <span>Mí</span>",
+          about_p1: "Soy una profesional creativa y orientada a los detalles con una sólida base en diseño visual, comunicación estratégica y liderazgo organizacional.",
+          about_p2: "Me desarrollo con éxito en la intersección de la conexión humana y la estrategia creativa, enfocando mi pasión en el diseño gráfico, el marketing de marca, los recursos humanos y la coordinación de eventos de alta energía.",
+          about_p3: "Con experiencia práctica especializada en el diseño de campañas de redes sociales atractivas y centradas en la audiencia utilizando herramientas como Canva y Adobe Photoshop, me encanta crear identidades de marca cohesivas que conecten genuinamente con las personas.",
+          about_p4: "Más allá del diseño, mi experiencia coordinando eventos a gran escala ha fortalecido mi capacidad de colaboración en equipos multidisciplinarios, la planificación logística, el liderazgo y la ejecución impecable de proyectos.",
+          about_p5: "Ya sea gestionando la dinámica de un equipo, manejando las relaciones con los clientes o construyendo contenido de marketing creativo, mi objetivo siempre es ofrecer experiencias impactantes, centradas en el ser humano y visualmente memorables.",
+          skills_title: "Habilidades <span>Profesionales</span>",
+          skills_tech_h: "Habilidades Técnicas",
+          skills_tech_p: "<strong>Lenguajes y Base:</strong><br>Python, JavaScript, SQL, C, Estructuras de Datos, Aprendizaje Automático.<br><br><strong>Desarrollo Web:</strong><br>HTML, CSS, React.js, Node.js, Express.js, MongoDB (MERN Stack).<br><br><strong>Librerías y Frameworks:</strong><br>Streamlit, OpenCV, pandas, NumPy, NLTK, scikit-learn.<br><br><strong>Herramientas y Bases de Datos:</strong><br>Git, PostgreSQL, Redis.",
+          skills_ui_h: "Diseño UI/UX", skills_ui_p: "Diseño de interfaces de usuario, esquemas de alambre (wireframing), prototipado, diseños responsivos y diseño de experiencia de usuario.",
+          skills_des_h: "Diseño y Marketing", skills_des_p: "Canva, Photoshop, Adobe Illustrator, Figma, branding, creación de contenido y comunicación visual.",
+          skills_ai_h: "IA y Aprendizaje Automático", skills_ai_p: "Chatbots, sistemas de recomendación, NLP, visión por computadora, automatización inteligente y aplicaciones impulsadas por inteligencia artificial.",
+          skills_soft_h: "Habilidades Blandas y Liderazgo", skills_soft_p: "Comunicación, creatividad, liderazgo, trabajo en equipo, gestión de equipos, colaboración, presentación, manejo de clientes, gestión del tiempo y superación personal.<br><br><strong>Idiomas:</strong><br>Inglés, Hindi",
+          skills_anim_h: "Animación Frontend", skills_anim_p: "GSAP, Anime.js, AOS, efectos de interfaz de usuario interactivos, glassmorphism, UI 3D y animaciones web modernas.",
+          exp_title: "Experiencia <span>Laboral</span>",
+          exp1_h: "Pasante de GenAI", exp1_sub: "ReGex Software Services, Jaipur", exp1_p: "Trabajó en chatbots multilingües impulsados por IA, aplicaciones Streamlit, integración de PostgreSQL y sistemas de interfaz de usuario responsivos.",
+          exp2_h: "Pasante de Aprendizaje Automático", exp2_sub: "Acmegrade", exp2_p: "Desarrolló proyectos de aprendizaje automático que incluyen sistemas de recomendación, paneles de control y aplicaciones de visión por computadora.",
+          exp3_h: "Coordinadora de Eventos", exp3_sub: "Resonance 2k25", exp3_p: "Gestionó la coordinación de eventos, la participación de los asistentes, el trabajo en equipo y las operaciones técnicas de los eventos.",
+          exp4_h: "Líder de Gestión", exp4_sub: "Student Innovation Network — Cup of Excellence", exp4_p: "Dirigió las operaciones completas de gestión de eventos, el manejo de patrocinios, la logística y la coordinación de participantes. Gestionó con éxito a los patrocinadores, coordinó equipos y aseguró un flujo de trabajo fluido durante todo el evento. Recibió un Certificado de Recomendación por liderazgo y excelencia en la gestión.",
+          proj_title: "Proyectos <span>Destacados</span>", proj_view: "Ver Proyecto →", proj_view_des: "Ver Diseños →",
+          proj1_tag: "Chatbot de IA", proj1_p: "Un chatbot de IA multilingüe creado con Streamlit, las API de Gemini/Gemma y PostgreSQL que presenta un historial de chat persistente, cambio de modelo inteligente y una interfaz moderna y responsiva.",
+          proj2_tag: "Full Stack AI", proj2_p: "Plataforma de flujo de trabajo basada en roles utilizando Node.js, PostgreSQL, Redis y soporte de chatbot de IA con análisis de sentimiento, seguimiento de asistencia, analíticas y automatización de procesos.",
+          proj3_tag: "MERN Stack", proj3_h: "Sitio Web de Reseñas de Películas", proj3_p: "Aplicación MERN de pila completa con autenticación, búsqueda de películas, páginas de detalles dinámicas, sistemas de reseñas y comentarios interactivos de usuarios.",
+          proj4_tag: "Aprendizaje Automático", proj4_h: "Sistema de Recomendación de Música", proj4_p: "Motor de recomendación basado en contenido utilizando Python, pandas, NLTK y scikit-learn con vectorización TF-IDF y algoritmos de similitud de coseno.",
+          proj5_tag: "App Web", proj5_h: "Panel de Control del Clima", proj5_p: "Aplicación climática responsiva integrada con la API de OpenWeatherMap y servicios de geolocalización para clima en tiempo real y pronósticos de 5 días.",
+          proj6_tag: "Frontend + GSAP", proj6_h: "Sistema de Detección de Moneda Falsa", proj6_p: "Proyecto de simulación frontend con carga de imágenes, validación de números de serie, animaciones GSAP, autenticación de almacenamiento local y una interfaz de usuario de flujo de trabajo interactiva.",
+          proj7_tag: "Visión por Computadora", proj7_h: "Sistema de Detección de Rostros", proj7_p: "Aplicación de detección de rostros en flujo de video en tiempo real creada con Python, OpenCV y algoritmos Haar Cascade para un reconocimiento facial eficiente.",
+          proj8_tag: "Branding", proj8_h: "Diseños de Posters para Redes Sociales", proj8_p: "Pósters promocionales creativos, materiales de branding y gráficos para redes sociales diseñados con Canva y Photoshop para campañas de marketing digital.",
+          cert_title: "Certificaciones y <span>Logros</span>",
+          cert_box_h: "Certificaciones Profesionales", cert_box_p: "<strong>NPTEL:</strong><br>Certificación de Python para Ciencia de Datos.<br><br><strong>Certificaciones de Infosys:</strong><br>Diseño de Bases de Datos y Modelado ER, Programación en C, Programación en Python.<br><br><strong>1stop.ai (Jul–Sep 2025):</strong><br>Certificado de Prácticas, Certificado de Finalización de Proyecto, Participación en Ciberseguridad.",
+          cert_award_h: "Premios", cert_award_p: "Obtuvo el <strong>1er Premio</strong> en la Competición de Proyectos de Hardware en JIET por el desarrollo de un proyecto innovador y presentación técnica.",
+          cert_hack_h: "Hackathons", cert_hack_p: "Participó en el <strong>Smart India Hackathon (SIH)</strong> demostrando innovación, trabajo en equipo y habilidades de resolución de problemas.",
+          cert_extra_h: "Extracurriculares", cert_extra_p: "Cadete de 3 Raj NCC con participación en actividades de Campamentos Nacionales, entrenamiento de liderazgo, disciplina y coordinación de equipos.",
+          cert_lead_h: "Liderazgo y Gestión", cert_lead_p: "Reconocida por su liderazgo, gestión de eventos, manejo de patrocinadores y excelencia organizacional a través de múltiples iniciativas de eventos universitarios y técnicos.<br><br>Gestionó con éxito equipos, coordinó flujos de trabajo de eventos y entregó experiencias impactantes enfocadas en la audiencia.",
+          contact_title: "¿Trabajamos <span>Juntos</span>?", contact_desc: "Disponible para diseño UI/UX, diseño gráfico, branding, proyectos freelance y colaboraciones creativas.",
+          contact_btn: "Enviar Mensaje",
+          place_name: "Su Nombre", place_email: "Su Correo", place_msg: "Su Mensaje",
+          footer_text: "© 2026 Priyadarshana Dadhich — Diseñadora UI/UX y Gráfica"
+        }
+      },
+      fr: {
+        translation: {
+          nav_about: "À propos", nav_skills: "Compétences", nav_experience: "Expérience", nav_projects: "Projets", nav_certifications: "Certifications", nav_contact: "Contact",
+          hero_title: "Priyadarshana <span>Dadhich</span>",
+          hero_desc: "Designer UI/UX, Designer Graphique & Développeuse AIML créant des expériences numériques modernes avec des visuels créatifs, du branding et des applications basées sur l'IA.",
+          hero_btn_projects: "Voir les Projets", hero_btn_resume: "⬇ Télécharger le CV", hero_btn_resume_success: "✔ Téléchargé",
+          about_title: "À Propos <span>de Moi</span>",
+          about_p1: "Je suis une professionnelle créative et soucieuse du détail, dotée d'une solide formation en design visuel, en communication stratégique et en leadership organisationnel.",
+          about_p2: "Je m'épanouis à l'intersection des relations humaines et de la stratégie créative, concentrant ma passion sur le design graphique, le marketing de marque, les ressources humaines et la coordination d'événements dynamiques.",
+          about_p3: "Avec une expérience pratique spécialisée dans la conception de campagnes sur les réseaux sociaux attrayantes et centrées sur le public à l'aide d'outils comme Canva et Adobe Photoshop, j'aime créer des identités de marque cohérentes qui connectent véritablement avec les gens.",
+          about_p4: "Au-delà du design, mon expérience dans la coordination d'événements à grande échelle a renforcé mes compétences en matière de collaboration inter-équipes, de planification logistique, de leadership et d'exécution fluide de projets.",
+          about_p5: "Qu'il s'agisse de gérer la dynamique d'une équipe, de gérer les relations avec les clients ou de créer du contenu marketing créatif, mon objectif est toujours de fournir des expériences percutantes, centrées sur l'humain et visuellement mémorables.",
+          skills_title: "Compétences <span>Professionnelles</span>",
+          skills_tech_h: "Compétences Techniques",
+          skills_tech_p: "<strong>Langages & Fondations:</strong><br>Python, JavaScript, SQL, C, Structures de Données, Machine Learning.<br><br><strong>Développement Web:</strong><br>HTML, CSS, React.js, Node.js, Express.js, MongoDB (MERN Stack).<br><br><strong>Bibliothèques & Frameworks:</strong><br>Streamlit, OpenCV, pandas, NumPy, NLTK, scikit-learn.<br><br><strong>Outils & Bases de Données:</strong><br>Git, PostgreSQL, Redis.",
+          skills_ui_h: "Design UI/UX", skills_ui_p: "Conception d'interfaces utilisateur, wireframing, prototypage, mises en page réactives et conception de l'expérience utilisateur.",
+          skills_des_h: "Design & Marketing", skills_des_p: "Canva, Photoshop, Adobe Illustrator, Figma, branding, création de contenu et communication visuelle.",
+          skills_ai_h: "IA & Machine Learning", skills_ai_p: "Chatbots, systèmes de recommandation, NLP, vision par ordinateur, automatisation intelligente et applications basées sur l'intelligence artificielle.",
+          skills_soft_h: "Soft Skills & Leadership", skills_soft_p: "Communication, créativité, leadership, travail d'équipe, gestion d'équipe, collaboration, présentation, relation client, gestion du temps et développement personnel.<br><br><strong>Langues:</strong><br>Anglais, Hindi",
+          skills_anim_h: "Animation Frontend", skills_anim_p: "GSAP, Anime.js, AOS, effets d'interface utilisateur interactifs, glassmorphism, UI 3D et animations web modernes.",
+          exp_title: "Expérience <span>Professionnelle</span>",
+          exp1_h: "Stagiaire GenAI", exp1_sub: "ReGex Software Services, Jaipur", exp1_p: "Travail sur des chatbots IA multilingues, des applications Streamlit, l'intégration de PostgreSQL et des systèmes d'interface utilisateur réactifs.",
+          exp2_h: "Stagiaire Machine Learning", exp2_sub: "Acmegrade", exp2_p: "Création de projets de machine learning comprenant des systèmes de recommandation, des tableaux de bord et des applications de vision par ordinateur.",
+          exp3_h: "Coordinatrice d'Événements", exp3_sub: "Resonance 2k25", exp3_p: "Gestion de la coordination des événements, de l'engagement des participants, du travail d'équipe et des opérations techniques des événements.",
+          exp4_h: "Responsable de Gestion", exp4_sub: "Student Innovation Network — Cup of Excellence", exp4_p: "Direction de l'ensemble des opérations de gestion des événements, de la gestion des parrainages, de la logistique et de la coordination des participants. Gestion réussie des sponsors, coordination des équipes et garantie d'un flux de travail fluide tout au long de l'événement. Recommandée par certificat pour son leadership et l'excellence de sa gestion.",
+          proj_title: "Projets <span>Phares</span>", proj_view: "Voir le Projet →", proj_view_des: "Voir les Designs →",
+          proj1_tag: "Chatbot IA", proj1_p: "Un chatbot IA multilingue développé avec Streamlit, les API Gemini/Gemma et PostgreSQL, comprenant un historique de discussion persistant, un changement de modèle intelligent et une interface moderne réactive.",
+          proj2_tag: "Full Stack AI", proj2_p: "Plateforme de flux de travail basée sur les rôles utilisant Node.js, PostgreSQL, Redis et un support de chatbot IA avec analyse des sentiments, suivi des présences, analyses et automatisation.",
+          proj3_tag: "MERN Stack", proj3_h: "Site Web de Critiques de Films", proj3_p: "Application MERN full-stack avec authentification, recherche de films, pages de détails dynamiques, systèmes de critiques et commentaires interactifs.",
+          proj4_tag: "Machine Learning", proj4_h: "Système de Recommandation Musicale", proj4_p: "Moteur de recommandation basé sur le contenu utilisant Python, pandas, NLTK et scikit-learn avec vectorisation TF-IDF et algorithmes de similitude cosinus.",
+          proj5_tag: "App Web", proj5_h: "Tableau de Bord Météo", proj5_p: "Application météo réactive intégrée à l'API OpenWeatherMap et aux services de géolocalisation pour la météo en temps réel et les prévisions sur 5 jours.",
+          proj6_tag: "Frontend + GSAP", proj6_h: "Système de Détection de Fausse Monnaie", proj6_p: "Projet de simulation frontend avec téléchargement d'images, validation des numéros de série, animations GSAP, authentification par stockage local et interface de flux de travail interactive.",
+          proj7_tag: "Vision par Ordinateur", proj7_h: "Système de Détection de Visages", proj7_p: "Application de détection de visages en flux vidéo en temps réel intégrée à Python, OpenCV et aux algorithmes Haar Cascade pour une reconnaissance faciale efficace.",
+          proj8_tag: "Branding", proj8_h: "Créations d'Affiches pour les Réseaux Sociaux", proj8_p: "Affiches promotionnelles créatives, supports de branding et graphismes pour les réseaux sociaux conçus avec Canva et Photoshop pour des campagnes numériques.",
+          cert_title: "Certifications & <span>Réussites</span>",
+          cert_box_h: "Certifications Professionnelles", cert_box_p: "<strong>NPTEL:</strong><br>Certification Python pour la Science des Données.<br><br><strong>Certifications Infosys:</strong><br>Conception de bases de données & modélisation ER, programmation C, programmation Python.<br><br><strong>1stop.ai (Juil-Sept 2025):</strong><br>Certificat de stage, certificat de fin de projet, participation à la cybersécurité.",
+          cert_award_h: "Prix", cert_award_p: "A obtenu le <strong>1er Prix</strong> au concours de projets matériels au JIET pour le développement de projets innovants et la présentation technique.",
+          cert_hack_h: "Hackathons", cert_hack_p: "Participation au <strong>Smart India Hackathon (SIH)</strong>, démontrant des compétences en matière d'innovation, de travail d'équipe et de résolution de problèmes.",
+          cert_extra_h: "Activités Extrascolaires", cert_extra_p: "Cadette du 3 Raj NCC avec participation aux activités des camps nationaux, formation au leadership, discipline et coordination d'équipe.",
+          cert_lead_h: "Leadership & Gestion", cert_lead_p: "Reconnue pour son leadership, sa gestion d'événements, sa gestion des sponsors et son excellence organisationnelle à travers de multiples initiatives universitaires et techniques.<br><br>Gestion réussie d'équipes, coordination des flux de travail événementiels et prestation d'expériences percutantes axées sur le public.",
+          contact_title: "Travaillons <span>Ensemble</span>", contact_desc: "Disponible pour des missions de design UI/UX, design graphique, branding, projets freelance et collaborations créatives.",
+          contact_btn: "Envoyer le Message",
+          place_name: "Votre Nom", place_email: "Votre Email", place_msg: "Votre Message",
+          footer_text: "© 2026 Priyadarshana Dadhich — Designer UI/UX & Graphique"
+        }
+      },
+      de: {
+        translation: {
+          nav_about: "Über mich", nav_skills: "Fähigkeiten", nav_experience: "Erfahrung", nav_projects: "Projekte", nav_certifications: "Zertifikate", nav_contact: "Kontakt",
+          hero_title: "Priyadarshana <span>Dadhich</span>",
+          hero_desc: "UI/UX-Designerin, Grafikdesignerin & AIML-Entwicklerin, die moderne digitale Erlebnisse mit kreativen Visuals, Branding und KI-gestützten Anwendungen erschafft.",
+          hero_btn_projects: "Projekte ansehen", hero_btn_resume: "⬇ Lebenslauf herunterladen", hero_btn_resume_success: "✔ Heruntergeladen",
+          about_title: "Über <span>Mich</span>",
+          about_p1: "Ich bin eine kreative und detailorientierte Fachkraft mit einem soliden Fundament in visuellem Design, strategischer Kommunikation und organisatorischer Führung.",
+          about_p2: "Ich bewege mich erfolgreich an der Schnittstelle zwischen menschlicher Verbindung und kreativer Strategie. Meine Leidenschaft gilt dem Grafikdesign, Markenmarketing, Personalwesen und der hochenergetischen Eventkoordination.",
+          about_p3: "Mit spezialisierter praktischer Erfahrung in der Gestaltung ansprechender, zielgruppenorientierter Social-Media-Kampagnen unter Verwendung von Tools wie Canva und Adobe Photoshop liebe ich es, konsistente Markenidentitäten zu schaffen, die Menschen wirklich ansprechen.",
+          about_p4: "Über das Design hinaus hat meine Erfahrung bei der Koordination von Großveranstaltungen meine Fähigkeiten in der teamübergreifenden Zusammenarbeit, der logistischen Planung, der Führung und der reibungslosen Projektausführung gestärkt.",
+          about_p5: "Ob ich Teamdynamiken verwalte, Kundenbeziehungen pflege oder kreative Marketinginhalte erstelle – mein Ziel ist es immer, wirkungsvolle, auf den Menschen ausgerichtete und visuell unvergessliche Erlebnisse zu liefern.",
+          skills_title: "Berufliche <span>Fähigkeiten</span>",
+          skills_tech_h: "Technische Fähigkeiten",
+          skills_tech_p: "<strong>Sprachen & Core:</strong><br>Python, JavaScript, SQL, C, Datenstrukturen, Maschinelles Lernen.<br><br><strong>Webentwicklung:</strong><br>HTML, CSS, React.js, Node.js, Express.js, MongoDB (MERN Stack).<br><br><strong>Bibliotheken & Frameworks:</strong><br>Streamlit, OpenCV, pandas, NumPy, NLTK, scikit-learn.<br><br><strong>Tools & Datenbanken:</strong><br>Git, PostgreSQL, Redis.",
+          skills_ui_h: "UI/UX-Design", skills_ui_p: "Benutzeroberflächendesign, Wireframing, Prototyping, responsive Layouts und User-Experience-Design.",
+          skills_des_h: "Design & Marketing", skills_des_p: "Canva, Photoshop, Adobe Illustrator, Figma, Branding, Content-Erstellung und visuelle Kommunikation.",
+          skills_ai_h: "KI & Maschinelles Lernen", skills_ai_p: "Chatbots, Empfehlungssysteme, NLP, Computer Vision, intelligente Automatisierung und KI-gestützte Anwendungen.",
+          skills_soft_h: "Soft Skills & Führung", skills_soft_p: "Kommunikation, Kreativität, Führungsqualitäten, Teamfähigkeit, Teammanagement, Zusammenarbeit, Präsentation, Kundenbetreuung, Zeitmanagement und Selbstverbesserung.<br><br><strong>Sprachen:</strong><br>Englisch, Hindi",
+          skills_anim_h: "Frontend-Animation", skills_anim_p: "GSAP, Anime.js, AOS, interaktive Effekte für Benutzeroberflächen, Glassmorphism, 3D-UI und moderne Webanimationen.",
+          exp_title: "Berufliche <span>Erfahrung</span>",
+          exp1_h: "GenAI-Praktikantin", exp1_sub: "ReGex Software Services, Jaipur", exp1_p: "Arbeitete an KI-gestützten mehrsprachigen Chatbots, Streamlit-Anwendungen, PostgreSQL-Integration und responsiven UI-Systemen.",
+          exp2_h: "Maschinelles Lernen Praktikantin", exp2_sub: "Acmegrade", exp2_p: "Entwicklung von Projekten zum maschinellen Lernen, einschließlich Empfehlungssystemen, Dashboards und Computer-Vision-Anwendungen.",
+          exp3_h: "Event-Koordinatorin", exp3_sub: "Resonance 2k25", exp3_p: "Verantwortlich für die Eventkoordination, das Teilnehmerengagement, die Teamarbeit und die technischen Abläufe der Veranstaltungen.",
+          exp4_h: "Leitung Management", exp4_sub: "Student Innovation Network — Cup of Excellence", exp4_p: "Leitete die gesamten Abläufe des Eventmanagements, das Sponsoring-Handling, die Logistik und die Teilnehmerkoordination. Sponsoren erfolgreich betreut, Teams koordiniert und für einen reibungslosen Workflow gesorgt. Empfehlungsschreiben für Führungs- und Managementleistungen erhalten.",
+          proj_title: "Ausgewählte <span>Projekte</span>", proj_view: "Projekt ansehen →", proj_view_des: "Designs ansehen →",
+          proj1_tag: "KI-Chatbot", proj1_p: "Ein mehrsprachiger KI-Chatbot, entwickelt mit Streamlit, Gemini/Gemma-APIs und PostgreSQL, mit fortlaufendem Chatverlauf, intelligentem Modellwechsel und einer responsiven, modernen Benutzeroberfläche.",
+          proj2_tag: "Full Stack AI", proj2_p: "Rollenbasierte Workflow-Plattform unter Verwendung von Node.js, PostgreSQL, Redis und KI-Chatbot-Unterstützung mit Stimmungsanalyse, Anwesenheitsverfolgung, Analysen und Automatisierung.",
+          proj3_tag: "MERN Stack", proj3_h: "Film-Bewertungswebseite", proj3_p: "Full-Stack-MERN-Anwendung mit Authentifizierung, Filmsuche, dynamischen Detailseiten, Bewertungssystemen und interaktiven Benutzerkommentaren.",
+          proj4_tag: "Maschinelles Lernen", proj4_h: "Musik-Empfehlungssystem", proj4_p: "Inhaltsbasiertes Empfehlungssystem mit Python, pandas, NLTK und scikit-learn mit TF-IDF-Vektorisierung und Kosinus-Ähnlichkeitsalgorithmen.",
+          proj5_tag: "Web-App", proj5_h: "Wetter-Dashboard", proj5_p: "Responsive Wetteranwendung, integriert mit der OpenWeatherMap-API und Geolokalisierungsdiensten für Echtzeitwetter und 5-Tage-Vorhersagen.",
+          proj6_tag: "Frontend + GSAP", proj6_h: "System zur Erkennung von Falschgeld", proj6_p: "Frontend-Simulationsprojekt mit Bild-Upload, Seriennummern-Validierung, GSAP-Animationen, Authentifizierung über den lokalen Speicher und interaktiver Workflow-Benutzeroberfläche.",
+          proj7_tag: "Computer Vision", proj7_h: "System zur Gesichtserkennung", proj7_p: "Echtzeit-Videostream-Gesichtserkennungsanwendung, erstellt mit Python, OpenCV und Haar-Cascade-Algorithmen für eine effiziente Gesichtserkennung.",
+          proj8_tag: "Branding", proj8_h: "Social-Media-Poster-Designs", proj8_p: "Kreative Werbeplakate, Branding-Materialien und Social-Media-Grafiken, die mit Canva und Photoshop für digitale Kampagnen entworfen wurden.",
+          cert_title: "Zertifikate & <span>Erfolge</span>",
+          cert_box_h: "Berufliche Zertifikate", cert_box_p: "<strong>NPTEL:</strong><br>Python für Datenwissenschaften Zertifikat.<br><br><strong>Infosys-Zertifikate:</strong><br>Datenbankdesign & ER-Modellierung, C-Programmierung, Python-Programmierung.<br><br><strong>1stop.ai (Jul–Sep 2025):</strong><br>Praktikumszeugnis, Projektzertifikat, Teilnahme an Cybersicherheitsschulung.",
+          cert_award_h: "Auszeichnungen", cert_award_p: "Erhielt den <strong>1. Preis</strong> beim Hardware-Projektwettbewerb am JIET für innovative Projektentwicklung und technische Präsentation.",
+          cert_hack_h: "Hackathons", cert_hack_p: "Teilnahme am <strong>Smart India Hackathon (SIH)</strong>, bei dem Innovation, Teamgeist und Problemlösungskompetenz unter Beweis gestellt wurden.",
+          cert_extra_h: "Extracurriculare Aktivitäten", cert_extra_p: "3 Raj NCC-Kadett mit Teilnahme an nationalen Lageraktivitäten, Führungstraining, Disziplin und Teamkoordination.",
+          cert_lead_h: "Führung & Management", cert_lead_p: "Anerkennung für Führungsqualitäten, Eventmanagement, Sponsorenbetreuung und organisatorische Exzellenz durch mehrere studentische und technische Eventinitiativen.<br><br>Erfolgreiche Leitung von Teams, Koordination von Event-Workflows und Bereitstellung wirkungsvoller, publikumsorientierter Erlebnisse.",
+          contact_title: "Lassen Sie uns <span>zusammen</span> arbeiten", contact_desc: "Verfügbar für UI/UX-Design, Grafikdesign, Branding, Freiberufliche Projekte und kreative Zusammenarbeit.",
+          contact_btn: "Nachricht senden",
+          place_name: "Ihr Name", place_email: "Ihre E-Mail", place_msg: "Ihre Nachricht",
+          footer_text: "© 2026 Priyadarshana Dadhich — UI/UX & Grafikdesignerin"
+        }
+      }
+    };
+
+    // INTIALIZE ENGINE RUNTIME
+    i18next.init({
+      lng: localStorage.getItem('preferredLang') || 'en',
+      resources
+    }, function() {
+      updateContent();
+      document.getElementById('languageSwitcher').value = i18next.language;
+    });
+
+    // CONTENT TRANSFUSION PIPELINE
+    function updateContent() {
+      // Parse data-i18n tags safely retaining inner styles or raw translations
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        let translation = i18next.t(key);
+
+        // Retain dynamic span modifications for layout titles
+        if(key.endsWith('_title') && !translation.includes('<span>')) {
+          const words = translation.split(' ');
+          if(words.length > 1) {
+            const lastWord = words.pop();
+            translation = `${words.join(' ')} <span>${lastWord}</span>`;
+          }
+        }
+        el.innerHTML = translation;
+      });
+
+      // Handle Placeholders dynamically
+      const lang = i18next.language;
+      const placeholders = {
+        name: resources[lang]?.translation.place_name || resources['en'].translation.place_name,
+        email: resources[lang]?.translation.place_email || resources['en'].translation.place_email,
+        msg: resources[lang]?.translation.place_msg || resources['en'].translation.place_msg
+      };
+      
+      if(document.getElementById('form_name')) document.getElementById('form_name').placeholder = placeholders.name;
+      if(document.getElementById('form_email')) document.getElementById('form_email').placeholder = placeholders.email;
+      if(document.getElementById('form_msg')) document.getElementById('form_msg').placeholder = placeholders.msg;
+    }
+
+    // DISPATCH TRANSLATION EVENT LISTENER
+    document.getElementById('languageSwitcher').addEventListener('change', (e) => {
+      i18next.changeLanguage(e.target.value, () => {
+        updateContent();
+        localStorage.setItem('preferredLang', e.target.value);
+      });
+    });
+
+    function handleParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+        particlesArray[i].draw();
+        if (particlesArray[i].alpha <= 0) {
+          particlesArray.splice(i, 1);
+          i--;
+        }
+      }
+      requestAnimationFrame(handleParticles);
+    }
+    handleParticles();
+
+    if(downloadBtn) {
+      downloadBtn.addEventListener('click',()=>{
+        const successText = resources[i18next.language]?.translation.hero_btn_resume_success || resources['en'].translation.hero_btn_resume_success;
+        const defaultText = resources[i18next.language]?.translation.hero_btn_resume || resources['en'].translation.hero_btn_resume;
+        downloadBtn.innerHTML = `<span>${successText}</span>`;
+        setTimeout(()=>{ downloadBtn.innerHTML = `<span>${defaultText}</span>`; },2500);
+      });
+    }
+
+    // ANIME.JS PIPELINES
+    anime({
+      targets: '.hero-text h1',
+      translateY: [80, 0],
+      opacity: [0, 1],
+      duration: 1800,
+      easing: 'easeOutExpo'
+    });
+
+    anime({
+      targets: '.hero-text p',
+      translateY: [40, 0],
+      opacity: [0, 1],
+      delay: 400,
+      duration: 1600,
+      easing: 'easeOutExpo'
+    });
+
+    anime({
+      targets: '.hero-buttons a',
+      translateY: [30, 0],
+      opacity: [0, 1],
+      delay: anime.stagger(200, {start: 600}),
+      duration: 1400,
+      easing: 'easeOutExpo'
+    });
+
+    anime({
+      targets: '.glass-orb',
+      translateY: [
+        { value: -35, duration: 6000 },
+        { value: 0, duration: 6000 }
+      ],
+      loop: true,
+      direction: 'alternate',
+      easing: 'easeInOutSine',
+      delay: anime.stagger(1500)
+    });
+
+    anime({
+      targets: '.glass-cube',
+      rotate: '1turn',
+      rotateX: '1turn',
+      duration: 12000,
+      easing: 'linear',
+      loop: true
+    });
+
+    anime({
+      targets: '.logo',
+      textShadow: [
+        '0 0 0px rgba(139,92,246,0)',
+        '0 0 25px rgba(139,92,246,.8)'
+      ],
+      direction: 'alternate',
+      loop: true,
+      easing: 'easeInOutSine',
+      duration: 2000
+    });
+
+    anime({
+      targets: '.skill-box',
+      translateY: [
+        {value: -12, duration: 2000},
+        {value: 0, duration: 2000}
+      ],
+      loop: true,
+      direction: 'alternate',
+      easing: 'easeInOutSine',
+      delay: anime.stagger(200)
+    });
+
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+
+        anime({
+          targets: btn,
+          translateX: x * 0.2,
+          translateY: y * 0.2,
+          duration: 400,
+          easing: 'easeOutQuad'
+        });
+      });
+
+      btn.addEventListener('mouseleave', () => {
+        anime({
+          targets: btn,
+          translateX: 0,
+          translateY: 0,
+          duration: 600,
+          easing: 'easeOutElastic(1, .5)'
+        });
+      });
+    });
+
+    const projectSection = document.querySelector('#projects');
+    const projectObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          anime({
+            targets: '.project-card',
+            opacity: [0, 1],
+            translateY: [100, 0],
+            delay: anime.stagger(250),
+            duration: 1600,
+            easing: 'easeOutExpo'
+          });
+          projectObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    
+    if(projectSection) projectObserver.observe(projectSection);
+
+    AOS.init({
+      duration: 1200,
+      once: true,
+      offset: 120,
+    });
+
+  </script>
+
+</body>
+</html>
